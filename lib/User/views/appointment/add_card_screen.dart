@@ -45,7 +45,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                             IconCircle(onTap:(){Navigator.of(context).pop(true);},icon: AntDesign.arrowleft,),
                             const Spacer(flex: 4,),
 
-                            Text('Add Card',style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
+                            Text('185'.tr,style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
                             const Spacer(flex: 6,),
                           ],),
                       ),
@@ -70,7 +70,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top:13.0.h,bottom: 10.0.h,left: 5.0.w),
-                        child: Text('Card Holder Name',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                        child: Text('186'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                       ),
                       Container(
                         width: 325.w,height: 38.w,alignment: Alignment.center,
@@ -89,7 +89,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                         ),),
                       Padding(
                         padding: EdgeInsets.only(top:13.0.h,bottom: 10.0.h,left: 5.0.w),
-                        child: Text('Card Number',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                        child: Text('187'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                       ),
                       Container(
                         width: 325.w,height: 38.w,alignment: Alignment.center,
@@ -114,7 +114,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(top:13.0.h,bottom: 10.0.h,left: 5.0.w),
-                                  child: Text('Expiry Date',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                                  child: Text('188'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                                 ),
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -139,7 +139,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(top:13.0.h,bottom: 10.0.h,left: 5.0.w),
-                                  child: Text('CVV',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                                  child: Text('189'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                                 ),
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -180,7 +180,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                                 },
                               ),
                             ),
-                            Text('Save Card',style: TextStyle(color: Colors.black87,fontSize: 16.0.w,fontWeight: FontWeight.w400),),
+                            Text('190'.tr,style: TextStyle(color: Colors.black87,fontSize: 16.0.w,fontWeight: FontWeight.w400),),
                           ],),
                       ),
                     ]

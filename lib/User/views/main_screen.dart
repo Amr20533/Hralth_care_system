@@ -10,6 +10,8 @@ class MainScreen extends GetView<MainScreenController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => MainScreenController());
+
     return Obx(()=> Scaffold(
         backgroundColor: controller.bgColors[controller.curTab.value],
         body:  SafeArea(child: controller.screen[controller.curTab.value]),

@@ -1,5 +1,6 @@
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/core/constant/image_asset.dart';
+import 'package:co_rhema/core/localization/change_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,12 +17,15 @@ class DocHomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LocalController lController = Get.put(LocalController());
+    bool isRTL = lController.language.languageCode.toLowerCase() == 'ar';
+
     return Row(
       children: [
         Container(
-            width:325.w * 0.993,
+            width:MediaQuery.of(context).size.width * 0.45,
             // width:325.w * 0.821,
-            height: 50.h,alignment: Alignment.center,
+            height: 48.h,alignment: Alignment.center,
             decoration: BoxDecoration(
               color: kDocSearchBarColor,
               borderRadius: BorderRadius.circular(10.0.w),
@@ -69,7 +73,30 @@ class DocHomeHeader extends StatelessWidget {
                 border: Border.all(width: 1.0.w,color: const Color(0XFFE1E1E1)),
                 borderRadius: BorderRadius.circular(16.w),
               ),
-              child: Row(
+              child: isRTL ? Row(
+                children: [
+                  for(int i = 0; i < controller.data.length; i++)...[
+                    if(controller.data[i]['id'] == controller.getDocId())
+                      Text(controller.data[i]['name'],style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold,fontSize: 11.sp,color: Colors.black),)
+                  ],
+                  const Spacer(),
+
+                  SvgPicture.asset(
+                    image,
+                    fit: BoxFit.cover,width: 15.w,height: 15.h,
+                  ),
+                  // Container(
+                  //   width: 25.w,height: 25.h,
+                  //   decoration: BoxDecoration(
+                  //       image: DecorationImage(
+                  //           fit: BoxFit.cover,
+                  //           image: NetworkImage(image!)
+                  //       )
+                  //   ),
+                  // ),
+
+                ],
+              ) : Row(
                 children: [
                   SvgPicture.asset(
                     image,

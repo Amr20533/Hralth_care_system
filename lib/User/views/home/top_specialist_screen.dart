@@ -72,7 +72,7 @@ class _TopSpecialistScreenState extends State<TopSpecialistScreen> {
             itemBuilder: (context,index) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.0.w),
               child: SpecialistCard(favTap:(){},
-                  onTap:(){    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(phs:widget.phs[index] ,)));},phs: widget.phs[index], verified: Icons.verified,
+                  onTap:(){    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(receivedData:widget.phs[index] ,tabIndex: index,)));},receivedData: widget.phs[index], verified: Icons.verified,
               child: SizedBox(width: 25.w,height: 25.w,
                 child: SvgPicture.asset('assets/images/icons/heart.svg',color: myBlueColor,),),
           ),

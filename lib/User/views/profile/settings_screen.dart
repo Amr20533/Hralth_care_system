@@ -1,3 +1,4 @@
+import 'package:co_rhema/User/utils/delete_account_alert.dart';
 import 'package:co_rhema/controllers/profileController.dart';
 import 'package:co_rhema/shares/style/icon_broken.dart';
 import 'package:co_rhema/User/views/appointment/widgets/custom_doc_card.dart';
@@ -31,6 +32,9 @@ class SettingsScreen extends StatelessWidget {
 
               },title: "85".tr,leading: Icons.key_outlined,),
               TilesWidget(onTap:(){
+                deleteAccountAlert(context, onPressed: () {
+
+                }, );
               },title: "86".tr,leading: FontAwesome.credit_card,),
             ],
           );

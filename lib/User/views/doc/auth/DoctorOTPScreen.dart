@@ -1,3 +1,4 @@
+import 'package:co_rhema/User/views/auth/widgets/auth/show_cherry_toast.dart';
 import 'package:co_rhema/User/views/doc/auth/forgot_password/reset_password.dart';
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/controllers/auth/verify_code_controller.dart';
@@ -46,7 +47,7 @@ class DocOTPScreen extends StatelessWidget {
                           children:[
                             TextSpan(text: 'Please enter the code we just sent to email',style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 11.w,color: Colors.black38)),
-                            TextSpan(text: '\nexample@gmail.com',style: TextStyle(
+                            TextSpan(text: '\n ${_storage.read("resend_Email")}',style: TextStyle(
                                 fontWeight: FontWeight.w400, height: 1.5,fontSize: 10.w,color: myBlueColor)),
 
                           ])),
@@ -54,7 +55,7 @@ class DocOTPScreen extends StatelessWidget {
                   OtpTextField(
                     fieldWidth: 50.0.w,
                     borderRadius: BorderRadius.circular(20),
-                    numberOfFields: 5,
+                    numberOfFields: 6,
                     borderColor: myBlueColor,focusedBorderColor:myBlueColor ,
                     //set to true to show as box or false to show as dash
                     showFieldAsBox: true,
@@ -64,7 +65,8 @@ class DocOTPScreen extends StatelessWidget {
                     },
                     //runs when every textfield is filled
                     onSubmit: (String verificationCode) {
-                      controller.goToDocVerifyScreen();
+                      _storage.write("doc_otp", verificationCode);
+                      controller.goToDocResPassScreen();
                     }, // end onSubmit
                   ),
                   SizedBox(height: 30.h),
@@ -80,6 +82,8 @@ class DocOTPScreen extends StatelessWidget {
                           ctrl.verifyEmail(resendCode).then((mail){
                             if(mail && !ctrl.processing){
                               debugPrint('Status: $mail >>>>>>>>>>>>>>> GO check your email!');
+                            }else{
+                              showCherryErrorToast(context, title: Text("7".tr), description: Text("8".tr));
                             }
 
 

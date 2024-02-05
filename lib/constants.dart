@@ -49,6 +49,7 @@ const Color kDocWhiteColor = Color(0xFFFFFFFF);
 const Color kDocPrimaryColor = Color(0xFF3E36B0);
 const Color kDocSearchBarColor = Color(0xFFE5E5E5);
 const Color kDocActiveIconColor = Color(0xFFEBD1EA);
+const Color kDocGreyColor = Color(0xFF868686);
 final Color kShadowColor = const Color(0xFFD3D3D3).withOpacity(.84);
 ///Background
 // const LinearGradient kDocGradientColor = LinearGradient(colors: [Color(0XFFEFBCD4),Color(0XFFCAC0F9),Color(0XFF6CCEE2)],begin: AlignmentDirectional.topCenter,end: AlignmentDirectional.bottomCenter,);
@@ -61,6 +62,7 @@ const LinearGradient kDocGradientColor = LinearGradient(
 const LinearGradient kDocSecGradientColor = LinearGradient(colors: [Color(0XFF58B6DD),Color(0XFF4762BF)],begin: Alignment.centerLeft,end: Alignment.centerRight,);
 /// Card Gradient
 const LinearGradient kDocCardGradientColor = LinearGradient(colors: [Color(0xFF9DF2F2),Color(0xFFE09CE7)],begin: AlignmentDirectional.centerStart,end: AlignmentDirectional.centerEnd,);
+const LinearGradient kDocDemoCardGradientColor = LinearGradient(colors: [Color(0xFF9DF2F2),Color(0xFFE09CE7),Color(0xFFE09CE7),Color(0xFF9DF2F2)],begin: AlignmentDirectional.topStart,end: AlignmentDirectional.bottomEnd,);
 
 
 

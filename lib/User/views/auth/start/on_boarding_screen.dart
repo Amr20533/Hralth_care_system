@@ -24,7 +24,7 @@ class OnBoardingScreen extends StatelessWidget {
     LocalController lController = Get.put(LocalController());
     // Locale currentLocale = Localizations.localeOf(context);
     // bool isRTL = currentLocale.languageCode.toLowerCase() == 'ar';
-    bool isRTL = lController.language!.languageCode.toLowerCase() == 'ar';
+    bool isRTL = lController.language.languageCode.toLowerCase() == 'ar';
 
     Size size = MediaQuery.of(context).size;
     return GetBuilder<OnBoardingControllerImp>(

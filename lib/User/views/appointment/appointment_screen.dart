@@ -14,8 +14,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentScreen extends StatefulWidget {
-  AppointmentScreen({Key? key,required this.phs}) : super(key: key);
-  final dynamic phs;
+  AppointmentScreen({Key? key,required this.receivedData}) : super(key: key);
+  final dynamic receivedData;
 
   @override
   State<AppointmentScreen> createState() => _AppointmentScreenState();
@@ -66,7 +66,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomDocCard(title:"126".tr, icon: AntDesign.arrowleft,),
-                    CustomCircularCard(phs: widget.phs),
+                    CustomCircularCard(receivedData: widget.receivedData),
                     Divider(color: const Color(0XFF838383).withOpacity(0.3),height: 0.6.w,),
                     Padding(
                         padding: EdgeInsets.symmetric(vertical: 18.0.h,),
@@ -78,7 +78,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 SizedBox(height: 5.0.h,),
                                 Text('7,500+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                                 SizedBox(height: 7.0.h,),
-                                Text('Patients',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                                Text('207'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
                               ],
                             ),
                             Column(
@@ -87,7 +87,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 SizedBox(height: 5.0.h,),
                                 Text('10+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                                 SizedBox(height: 7.0.h,),
-                                Text('Years Exp.',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                                Text('210'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                               ],
                             ),
@@ -97,7 +97,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 SizedBox(height: 5.0.h,),
                                 Text('4.9+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                                 SizedBox(height: 7.0.h,),
-                                Text('Rating',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                                Text('208'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                               ],
                             ),
@@ -107,7 +107,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 SizedBox(height: 5.0.h,),
                                 Text('4,956',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                                 SizedBox(height: 7.0.h,),
-                                Text('Reviews',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                                Text('209'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                               ],
                             ),
@@ -117,12 +117,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     // SizedBox(height:8.h),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0.h),
-                      child: Text('Book Appointment'.toUpperCase(),style: TextStyle(color:Colors.black45,fontSize: 14.h,fontWeight: FontWeight.w400),),
+                      child: Text('126'.tr.toUpperCase(),style: TextStyle(color:Colors.black45,fontSize: 14.h,fontWeight: FontWeight.w400),),
                     ),
 
                     Padding(
                       padding: EdgeInsets.only(bottom: 12.0.h),
-                      child: Text('Day',style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
+                      child: Text('225'.tr,style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
                     ),
                     SizedBox(height: 46.0.w,
                       child: ListView.builder(
@@ -146,7 +146,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               ),
                               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                              index == 0 ? Text('Today',style:TextStyle(color: selectedDate == index ? Colors.white :  Colors.black45,fontSize:10.w,fontWeight: FontWeight.w400)) : Text(_dayFormatter.format(date0).toString().substring(0,3),style:TextStyle(color: selectedDate == index ? Colors.white :  Colors.black45,fontSize:10.w,fontWeight: FontWeight.w400)),
+                              index == 0 ? Text('148'.tr,style:TextStyle(color: selectedDate == index ? Colors.white :  Colors.black45,fontSize:10.w,fontWeight: FontWeight.w400)) : Text(_dayFormatter.format(date0).toString().substring(0,3),style:TextStyle(color: selectedDate == index ? Colors.white :  Colors.black45,fontSize:10.w,fontWeight: FontWeight.w400)),
                                 SizedBox(height: 5.0.h,),
                                 Text(DateFormat('d MMM').format(date0),style:TextStyle(color: selectedDate == index ? Colors.white :  Colors.black,fontSize:13.w,fontWeight: FontWeight.w500)),
 
@@ -160,7 +160,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
                     Padding(
                       padding: EdgeInsets.only(bottom: 12.0.h,top: 18.0.h),
-                      child: Text('Time',style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
+                      child: Text('73'.tr,style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
                     ),
                     SizedBox(height: 46.0.w,
                       child: ListView.builder(
@@ -185,13 +185,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 12.0.w),
                       child: ScheduleBox(onPressed: (){},
-                          text: 'Request Schedule', hintText: 'Want a custom schedule?'),
+                          text: '226'.tr, hintText: '227'.tr),
                     ),
 
                   ]),
             ),
           ),),),
-      bottomNavigationBar: CustomBottomButton(text:'Make Appointment',onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => PackageScreen()));}),
+      bottomNavigationBar: CustomBottomButton(text:'228'.tr,onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => PackageScreen()));}),
     );
 
   }

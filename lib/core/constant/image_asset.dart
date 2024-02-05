@@ -13,6 +13,7 @@ class ImageAsset{
   static const String server = '$lottieFiles/server.json';
   /// Doc Home Assets
   static const String logout = '$rootImages/icons/logout.svg';
+  static const String home = '$rootImages/icons/home.svg';
   static const String messaging = '$rootImages/icons/messaging_0.svg';
   static const String inActiveNotification = '$rootImages/icons/notification2.svg';
   static const String activeNotification = '$rootImages/icons/notification.svg';
@@ -22,18 +23,22 @@ class ImageAsset{
   static const String arrowDown = '$rootImages/icons/arrow_down_0.svg';
   static const String heart = '$rootImages/icons/heart_0.svg';
   static const String chartArrowDown = '$rootImages/icons/chart_arr_down.svg';
-  static const String chartArrowUp = '$rootImages/icons/chart_arrow_up.svg';
+  static const String chartArrowUp = '$rootImages/icons/char_arrow_up.svg';
   static const String ellipse = '$rootImages/icons/Ellipse.svg';
   static const String calender = '$rootImages/icons/calender_0.svg';
   static const String fever = '$rootImages/icons/fever.svg';
+  static const String cough = '$rootImages/icons/cough.svg';
   static const String messagingSec = '$rootImages/icons/messaging.svg';
   static const String settings = '$rootImages/icons/settings.svg';
   static const String chart = '$rootImages/icons/chart.svg';
   static const String visaMain = '$rootImages/visa_grid.svg';
   static const String visa = '$rootImages/visa.svg';
   static const String search = '$rootImages/icons/search.svg';
+  static const String user = '$rootImages/icons/noun-user-82383.png';
+  static const String user_1 = '$rootImages/icons/noun-user-82383.svg';
   /// Home Images
-  static const String equipment = '$rootImages/icons/equipment.svg';
-  static const String priDoc = '$rootImages/docs/doctor_1.svg';
+  static const String equipment = '$rootImages/equipment.svg';
+  static const String equipment_2 = '$rootImages/equipment.jpg';
+  static const String priDoc = '$rootImages/docs/doc_2.svg';
 
 }

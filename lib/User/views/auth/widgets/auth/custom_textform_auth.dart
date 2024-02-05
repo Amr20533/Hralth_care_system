@@ -68,7 +68,10 @@ class CustomTextFormAuth extends StatelessWidget {
                   child: GestureDetector(onTap:suffixTap, child:Text(suffixText!,style: Theme.of(context).textTheme.titleMedium!.copyWith(color: myBlueColor.withOpacity(0.6),fontWeight: FontWeight.w500,height: 2.0.h),)),
                 ),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(7.w)),
-          ),),
+          ),
+            onChanged: inputValidator,
+
+          ),
         ],
       ),
     );

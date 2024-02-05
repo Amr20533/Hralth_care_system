@@ -31,7 +31,7 @@ class SpecialistScreen extends StatelessWidget {
             itemBuilder: (context,index) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0.w),
               child: SpecialistCard(favTap:(){},
-                onTap:(){    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(phs:phs[index] ,)));},phs: phs[index], verified: Icons.verified,
+                onTap:(){    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(receivedData:phs[index], tabIndex: index,)));},receivedData: phs[index], verified: Icons.verified,
                 child: SizedBox(width: 25.w,height: 25.w,
                   child: SvgPicture.asset('assets/images/icons/heart.svg',color: myBlueColor,),),
               ),

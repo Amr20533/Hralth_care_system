@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CommentBox extends StatelessWidget {
-  const CommentBox({required this.width, required this.height, required this.hintText,required this.borderRadius,super.key});
+  const CommentBox({required this.width, required this.height, required this.controller, required this.hintText,required this.borderRadius,super.key});
   final double width,height;
   final String hintText;
   final BorderRadiusGeometry borderRadius;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,6 +19,7 @@ class CommentBox extends StatelessWidget {
 
       ),
       child: TextFormField(
+        controller: controller,
         maxLines: null, // Set maxLines to null for a multiline text input
         style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w400,color: Colors.black45,fontSize: 10.w),
         autofocus: true,

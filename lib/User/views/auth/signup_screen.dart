@@ -46,8 +46,16 @@ class SignUpPage extends StatelessWidget {
             const SizedBox(height: 15),
             CustomTextFormAuth(
               type: TextInputType.name,
-              inputValidator: (val){
-                return validInput(val!,3,50,"username");
+              inputValidator: (name){
+                // return validInput(val!,3,50,"username");
+                if(name!.isNotEmpty){
+                    if(!name.contains(RegExp(r'[A-Z]'))){
+                    return '166'.tr;
+                    }
+                    return null;
+                    }else{
+                    return '167'.tr;
+                    }
               },
               controller: controller.username,
               hintText: "23".tr,
@@ -65,7 +73,7 @@ class SignUpPage extends StatelessWidget {
                   }
                       return null;
                   }else{
-                      return 'Field cannot be empty';
+                     return '167'.tr;
                   }
   },
               controller: controller.email,
@@ -105,7 +113,7 @@ class SignUpPage extends StatelessWidget {
 
               SignupModel signupModel = SignupModel(username: controller.username.text, email: controller.email.text, password: controller.password.text, confirmPassword: controller.password.text,);
               controller.userSignUp(signupModel).then((response){
-                if(response == true){
+                if(response == true && !controller.processing){
                   controller.goToSuccessSignUp();
                 }else{
                   debugPrint("Form not valid");

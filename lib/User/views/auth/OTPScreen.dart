@@ -1,4 +1,5 @@
 import 'package:co_rhema/constants.dart';
+import 'package:co_rhema/controllers/auth/reset_password_controller.dart';
 import 'package:co_rhema/controllers/auth/verify_code_controller.dart';
 import 'package:co_rhema/User/views/appointment/widgets/custom_doc_card.dart';
 import 'package:co_rhema/User/views/auth/forgot_password/reset_password.dart';
@@ -16,7 +17,9 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    VerifyCodeControllerImp controller = Get.put(VerifyCodeControllerImp());
+    // VerifyCodeControllerImp controller = Get.put(VerifyCodeControllerImp());
+    ResetPasswordControllerImp controller = Get.put(ResetPasswordControllerImp());
+
     var _storage = GetStorage();
     String resendCode = _storage.read("user_resend_Email");
 
@@ -68,9 +71,9 @@ class OTPScreen extends StatelessWidget {
 
                   SizedBox(height: 33.h),
                   OtpTextField(
-                    fieldWidth: 50.0.w,
+                    fieldWidth: 40.0.w,
                     borderRadius: BorderRadius.circular(20),
-                    numberOfFields: 5,
+                    numberOfFields: 6,
                     borderColor: myBlueColor,focusedBorderColor:myBlueColor ,
                     //set to true to show as box or false to show as dash
                     showFieldAsBox: true,
@@ -80,7 +83,8 @@ class OTPScreen extends StatelessWidget {
                     },
                     //runs when every textfield is filled
                     onSubmit: (String verificationCode) {
-                      // controller.goToResetPassword();
+                      _storage.write("user_otp", verificationCode);
+                      controller.goToResetPassword();
                     }, // end onSubmit
                   ),
                   SizedBox(height: 30.h),

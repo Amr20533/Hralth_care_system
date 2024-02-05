@@ -4,6 +4,7 @@ import 'package:co_rhema/User/views/favs/widgets/hospital_card.dart';
 import 'package:co_rhema/User/views/home/widgets/hospital_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class FavHospitalScreen extends StatelessWidget {
   const FavHospitalScreen({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class FavHospitalScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.0.h),
-                      child: Text('Remove from Favorite?',style: TextStyle(fontSize: 16.w,color: Colors.black,fontWeight: FontWeight.w500),),
+                      child: Text('240'.tr,style: TextStyle(fontSize: 16.w,color: Colors.black,fontWeight: FontWeight.w500),),
                     ),
                     Container(height: 1.0.w,margin: EdgeInsets.symmetric(horizontal: 20.0.w),
                       decoration:const BoxDecoration(
@@ -63,11 +64,11 @@ class FavHospitalScreen extends StatelessWidget {
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ChoiceButton(width: 140.w,height: 45.w,
-                              text:'Cancel',tColor: myBlueColor,color: kColorsLightBlue100,onTap: (){
+                              text:'93'.tr,tColor: myBlueColor,color: kColorsLightBlue100,onTap: (){
                             Navigator.pop(context);
                           }),
                           ChoiceButton(width: 140.w,height: 45.w,
-                              text:'Yes, Remove',color: myBlueColor,tColor: Colors.white,onTap: (){
+                              text:'241'.tr,color: myBlueColor,tColor: Colors.white,onTap: (){
                             Navigator.pop(context);
                           }),
                         ],),

@@ -37,7 +37,7 @@ class SuccessResetPassword extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: CustomButtonAuth(
-                text: "31".tr,
+                text: "8".tr,
                 onPressed: () {
                   controller.goToLoginPage();
                 }),

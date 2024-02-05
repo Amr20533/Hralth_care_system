@@ -15,12 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var _storage = GetStorage();
     Get.put(ResetPasswordControllerImp());
     Get.put(DocManagementHomeController());
     Get.put(ProfileControllerImp());
@@ -88,26 +90,22 @@ class ResetPassword extends StatelessWidget {
               CustomButtonAuth(
                   text: "33".tr,
                   onPressed: () async{
-                        String resToken = await controller.getResToken();
-                        controller.resetPassword(resToken, controller.password.text).then((newPass){
+                        String otp = _storage.read("user_otp");
+                        controller.resetPassword(otp, controller.password.text).then((newPass){
                           if(newPass && controller.password.text == controller.resPassword.text){
                               controller.goToSuccessResetPassword();
                           }else if(controller.password.text != controller.resPassword.text){
                             CherryToast.warning(
                               displayCloseButton: false,
                               enableIconAnimation: true,
-                              title: Text("Warning!", style: TextStyle(color: Colors.amber,fontSize: 16.w, fontWeight: FontWeight.bold)),
+                              title: Text("150".tr, style: TextStyle(color: Colors.amber,fontSize: 16.w, fontWeight: FontWeight.bold)),
                               displayTitle:  true,
                               description:  Text("5".tr, style: const TextStyle(color: Colors.black45)),
                               animationType:  AnimationType.fromLeft,
                               animationDuration: const Duration(seconds: 2),
                               animationCurve: Curves.fastLinearToSlowEaseIn,
                               // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
-                              actionHandler: (){
-
-                                print("Hello World!!");
-
-                              },
+                              actionHandler: (){},
                               autoDismiss:  true,
                               toastPosition:  Position.bottom,
                             ).show(context);
