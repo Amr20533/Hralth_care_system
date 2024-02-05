@@ -1,5 +1,7 @@
+import 'package:co_rhema/User/views/handling_data_view.dart';
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/controllers/auth/login_controller.dart';
+import 'package:co_rhema/core/constant/app_routes.dart';
 import 'package:co_rhema/shares/style/icon_broken.dart';
 import 'package:co_rhema/User/views/appointment/widgets/custom_doc_card.dart';
 import 'package:co_rhema/User/views/favs/fav_screen.dart';
@@ -20,76 +22,77 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginControllerImp());
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 14.0.w,top: 12.0.w),
-            child: const CustomDocCard(deActivate: true,title:"Profile", icon: AntDesign.arrowleft,),
-          ),
-          Center(
-            child: Stack(alignment: AlignmentDirectional.bottomEnd,
-              children: [
-                Container(width: 94.w,height: 94.w,
-                  margin: EdgeInsets.only(top: 10.h),
-                  child: CircleAvatar(
-                    radius: 36.h,
-                    backgroundImage:const NetworkImage('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D'),
-                    // backgroundImage: NetworkImage(image),
-                  ),
-                ),
-                Positioned(bottom: 0,right: 2.w,
-                    child: Container(width: 30.w,height: 30.w,
-                      alignment: Alignment.center,
-                      decoration:const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Container(width: 24.w,height: 24.w,
-                          decoration:const BoxDecoration(
-                              color: myBlueColor,
-                              shape: BoxShape.circle
-                          ),
-                          child: Icon(MaterialIcons.edit,color: Colors.white,size: 14.w,)),
-                    ))
-                // child: Icon(MaterialIcons.verified,color: myBlueColor,size: 14.w,))
-              ],
+      child: GetBuilder<LoginControllerImp>(builder: (controller){
+        return HandlingDataView(widget: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 14.0.w,top: 12.0.w),
+              child: const CustomDocCard(deActivate: true,title:"Profile", icon: AntDesign.arrowleft,),
             ),
-          ),
-          SizedBox(height: 30.h),
+            Center(
+              child: Stack(alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  Container(width: 94.w,height: 94.w,
+                    margin: EdgeInsets.only(top: 10.h),
+                    child: CircleAvatar(
+                      radius: 36.h,
+                      backgroundImage:const NetworkImage('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D'),
+                      // backgroundImage: NetworkImage(image),
+                    ),
+                  ),
+                  Positioned(bottom: 0,right: 2.w,
+                      child: Container(width: 30.w,height: 30.w,
+                        alignment: Alignment.center,
+                        decoration:const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Container(width: 24.w,height: 24.w,
+                            decoration:const BoxDecoration(
+                                color: myBlueColor,
+                                shape: BoxShape.circle
+                            ),
+                            child: Icon(MaterialIcons.edit,color: Colors.white,size: 14.w,)),
+                      ))
+                  // child: Icon(MaterialIcons.verified,color: myBlueColor,size: 14.w,))
+                ],
+              ),
+            ),
+            SizedBox(height: 30.h),
 
-    Column(
-    children: [
-    SizedBox(height: 10.h,),
-    Column(
-    children: [
-      TilesWidget(onTap:(){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const UserProfile()));
-      }, title: 'Your profile', leading: FontAwesome.user_o,
+            Column(
+                children: [
+                  SizedBox(height: 10.h,),
+                  Column(
+                    children: [
+                      TilesWidget(onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const UserProfile()));
+                      }, title: 'Your profile', leading: FontAwesome.user_o,
 
-      ),
-    TilesWidget(onTap:(){
-    },title: "Payment Method",leading: FontAwesome.credit_card,),
-    TilesWidget(onTap:(){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const FavScreen()));
-    },title: "Favorite",leading: Fontisto.heart_alt,),
-    TilesWidget(onTap:(){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
-    },title: "Settings",leading: Icons.settings_outlined,),
-      TilesWidget(onTap:(){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const HelpScreen()));
-      },title: "Help Center",leading: AntDesign.exclamationcircleo,),
-      TilesWidget(onTap:(){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const PrivacyScreen()));
-      },title: "Privacy Policy",leading: Fontisto.locked,),
-    // },title: "Privacy Policy",leading: Fontisto.locked,),
-      TilesWidget(onTap:(){
-        _showBottomSheet(context);
-    },title: "Log out",leading: IconBroken.Logout,),
-    ],
-    ),
-         ])
-          /*Padding(
+                      ),
+                      TilesWidget(onTap:(){
+                      },title: "Payment Method",leading: FontAwesome.credit_card,),
+                      TilesWidget(onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const FavScreen()));
+                      },title: "Favorite",leading: Fontisto.heart_alt,),
+                      TilesWidget(onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
+                      },title: "Settings",leading: Icons.settings_outlined,),
+                      TilesWidget(onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HelpScreen()));
+                      },title: "Help Center",leading: AntDesign.exclamationcircleo,),
+                      TilesWidget(onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const PrivacyScreen()));
+                      },title: "Privacy Policy",leading: Fontisto.locked,),
+                      // },title: "Privacy Policy",leading: Fontisto.locked,),
+                      TilesWidget(onTap:(){
+                        _showBottomSheet(context);
+                      },title: "Log out",leading: IconBroken.Logout,),
+                    ],
+                  ),
+                ])
+            /*Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
                   "Profile",
@@ -101,8 +104,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),*/
-        ],
-      ),
+          ],
+        ), request: controller.statusRequest);
+        },),
     );
      /* appBar: AppBar(
         elevation: 0.0,
@@ -211,13 +215,13 @@ class ProfileScreen extends StatelessWidget {
                       child: Text('125'.tr,style:Theme.of(context).textTheme.titleMedium!.copyWith(color: const Color(0XFF7A7A7A),fontWeight: FontWeight.w400,fontSize: 14.w)),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0.w,vertical: 24.0.h),
+                      padding: EdgeInsets.symmetric(horizontal: 8.0.w,vertical: 22.0.h),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
 
                           GestureDetector(
                             onTap: (){
-                              Navigator.pop(context);
+                              Get.back();
                             },
                             child: Container(alignment: Alignment.center,
                               width: 140.w,height: 45.w,
@@ -234,6 +238,7 @@ class ProfileScreen extends StatelessWidget {
                                 text:'123'.tr,color: myBlueColor,tColor: Colors.white,onTap: (){
                                   controller.userLogout().then((loggedOut){
                                     if(loggedOut == true){
+                                      Get.offAllNamed(AppRoutes.login);
                                       debugPrint("Successfully LoggedOut");
                                       Get.back();
                                     }else{
@@ -256,7 +261,7 @@ class ProfileScreen extends StatelessWidget {
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Color(0xff555555);
+    Paint paint = Paint()..color = const Color(0xff555555);
     Path path = Path()
       ..relativeLineTo(0, 150)
       ..quadraticBezierTo(size.width / 2, 225, size.width, 150)

@@ -10,6 +10,7 @@ abstract class VerifyCodeController extends GetxController {
   verifyEmail(String email);
   goToDocVerifyScreen();
   goToVerifyScreen();
+  goToDocResPassScreen();
   userVerifyEmail(String email);
 }
 
@@ -41,14 +42,11 @@ class VerifyCodeControllerImp extends VerifyCodeController {
 
   @override
   Future<bool> verifyEmail(String email) async{
-    var formData = formState.currentState;
     bool ckMainResponse = false;
-    if(formData!.validate()){
       processing = true;
       ckMainResponse = await AuthHelper().docResetPassword(email);
       debugPrint('EmailResponse>>>>>>>>>>>>>>>>>>>>>> $ckMainResponse');
       processing = false;
-    }
     return ckMainResponse;
 
 
@@ -71,6 +69,10 @@ class VerifyCodeControllerImp extends VerifyCodeController {
   @override
   goToDocVerifyScreen() {
     Get.offNamed(AppRoutes.doctorsVerifyCode);
+  }
+  @override
+  goToDocResPassScreen() {
+    Get.offNamed(AppRoutes.doctorsResetPassword);
   }
 
   @override

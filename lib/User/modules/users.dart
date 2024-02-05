@@ -7,7 +7,7 @@ class ChatUsers{
   ChatUsers({ this.text, this.messageText, this.imageURL, this.time});
 
   static List<ChatUsers> chats =[
-    ChatUsers(text: "Carla Schoen", messageText: "Perfect, will check it", imageURL: "imageURLs/userimageURL1.jpeg", time: "09:34 PM"),
+    ChatUsers(text: "Angile Brekke", messageText: "Perfect, will check it", imageURL: "imageURLs/userimageURL1.jpeg", time: "09:34 PM"),
     ChatUsers(text: "Glady's Murphy", messageText: "Thanks", imageURL: "imageURLs/userimageURL2.jpeg", time: "09:34 PM"),
     ChatUsers(text: "Deanna Botsford V", messageText: "Welcome!", imageURL: "imageURLs/userimageURL3.jpeg", time: "09:10 PM"),
     ChatUsers(text: "Philip Fox", messageText: "Good Morning!", imageURL: "imageURLs/userimageURL4.jpeg", time: "28 Mar"),

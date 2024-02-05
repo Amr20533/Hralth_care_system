@@ -3,10 +3,12 @@ import 'package:co_rhema/User/views/appointment/widgets/custom_doc_card.dart';
 import 'package:co_rhema/User/views/appointment/widgets/dropped_card.dart';
 import 'package:co_rhema/User/views/home/widgets/custom_bottom_button.dart';
 import 'package:co_rhema/constants.dart';
+import 'package:co_rhema/controllers/home/review_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
 import 'widgets/comment_box.dart';
 
@@ -18,10 +20,10 @@ class PatientDetails extends StatefulWidget {
 }
 
 class _PatientDetailsState extends State<PatientDetails> {
-  String _booking = "Self";
-  List<String> bookingList = ["Self","Family","Others","Individual"];
-  String _selectedGender = "None";
-  List<String> genderList = ["Male","Female"];
+  String _booking = "171".tr;
+  List<String> bookingList = ["171".tr,"231".tr,"232".tr,"233".tr];
+  String _selectedGender = "234".tr;
+  List<String> genderList = ["52".tr,"53".tr];
   int _selectedAge = 24;
   List<int> ageList = [22,24,28,32,36,40,42];
 
@@ -39,12 +41,12 @@ class _PatientDetailsState extends State<PatientDetails> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomDocCard(title:"Patient Details", icon: AntDesign.arrowleft,),
+                  CustomDocCard(title:"184".tr, icon: AntDesign.arrowleft,),
                   Padding(
                     padding: EdgeInsets.only(top:24.0.h,bottom: 10.0.h,left: 5.0.w),
                     // padding: EdgeInsets.only(left: 4.0.w,top: 10.h,bottom: 5.h,),
 
-                    child: Text('Booking for',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                    child: Text('70'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                   ),
                   DroppedCard(text: _booking,
                     items: bookingList.map<DropdownMenuItem<String>>((String value) {
@@ -59,7 +61,7 @@ class _PatientDetailsState extends State<PatientDetails> {
                   },),
                   Padding(
                     padding: EdgeInsets.only(top:14.0.h,bottom: 10.0.h,left: 5.0.w),
-                    child: Text('Gender',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                    child: Text('51'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                   ),
                   DroppedCard(text: _selectedGender,
                     items: genderList.map<DropdownMenuItem<String>>((String value) {
@@ -74,9 +76,9 @@ class _PatientDetailsState extends State<PatientDetails> {
                   },),
                   Padding(
                     padding: EdgeInsets.only(top:14.0.h,bottom: 10.0.h,left: 5.0.w),
-                    child: Text('Your Age',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                    child: Text('182'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                   ),
-                  DroppedCard(text: '$_selectedAge Years',
+                  DroppedCard(text: '$_selectedAge ${"183".tr}',
                     items: ageList.map<DropdownMenuItem<String>>((int value) {
                       return DropdownMenuItem<String>(
                           value: value.toString(),
@@ -89,13 +91,16 @@ class _PatientDetailsState extends State<PatientDetails> {
                   },),
                   Padding(
                     padding: EdgeInsets.only(top:14.0.h,bottom: 10.0.h,left: 5.0.w),
-                    child: Text('Write in Your Problem',style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
+                    child: Text('180'.tr,style: TextStyle(color: Colors.black87,fontSize: 12.0.w,fontWeight: FontWeight.normal),),
                   ),
-                  CommentBox(width: 325.w,height: 200.w,hintText: 'Write here...',borderRadius: BorderRadius.circular(6.0.w),),
+                  GetBuilder<ReviewControllerImp>(builder: (controller){
+                    return CommentBox(width: 325.w,height: 200.w,controller: controller.reviewsController,hintText: '179'.tr,borderRadius: BorderRadius.circular(6.0.w),);
+                  },),
+
 
                 ]),
           ),),),
-      bottomNavigationBar: CustomBottomButton(text: "Next",onTap:(){
+      bottomNavigationBar: CustomBottomButton(text: "181".tr,onTap:(){
         Navigator.push(context, MaterialPageRoute(builder: (context) => const AddCardScreen()));
       }),
 

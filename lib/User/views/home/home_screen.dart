@@ -3,8 +3,11 @@ import 'package:co_rhema/User/views/home/widgets/schedule_card.dart';
 import 'package:co_rhema/User/views/home/widgets/search_filter_bar.dart';
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/User/modules/speciality.dart';
+import 'package:co_rhema/controllers/home/fav_controller.dart';
 import 'package:co_rhema/controllers/home/main_screen_controller.dart';
 import 'package:co_rhema/core/constant/app_routes.dart';
+import 'package:co_rhema/core/constant/image_asset.dart';
+import 'package:co_rhema/models/home/doctor_data_model.dart';
 import 'package:co_rhema/shares/style/icon_broken.dart';
 import 'package:co_rhema/User/views/home/details_screen.dart';
 import 'package:co_rhema/User/views/home/hospital_details.dart';
@@ -30,7 +33,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainScreenController>(builder: (controller){
+    Get.put(FavControllerImp());
+    Get.put(MainScreenController());
       return Padding(
           padding:  EdgeInsets.symmetric(horizontal: 12.0.w,vertical: 3.0.h),
           child: SingleChildScrollView(
@@ -43,7 +47,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const LocationBar(),
                     SizedBox(height: 20.0.h,),
-                    SearchFilterBar(controller: controller.searchController,),
+                    GetBuilder<MainScreenController>(builder: (controller){
+                      return SearchFilterBar(controller: controller.searchController,);
+                    }),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0.h),
                       child: CategoryBar(text: "131".tr,hasIcon: true,onPressed:(){}),
@@ -100,30 +106,196 @@ class HomeScreen extends StatelessWidget {
                     CategoryBar(text: "133".tr,onPressed:() {
                       Navigator.push(context,MaterialPageRoute(builder:(context) => TopSpecialistScreen(phs: phs,)));
                     }),
-                    ListView.separated(
-                      itemCount: phs.length,scrollDirection: Axis.vertical,padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),shrinkWrap: true,
-                      // controller:scrollController ,
-                      itemBuilder: (context,index) => SpecialistCard(favTap:(){},onTap:(){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(phs:phs[index] ,)));},phs: phs[index], verified: verified, child: GestureDetector(
-                        onTap:(){},
-                        child: SvgPicture.asset('assets/images/icons/heart-icon.svg'),
-                      ),),
-                      separatorBuilder: (context,index) => SizedBox(height: 12.0.h,),
-                    ),
+                    GetBuilder<FavControllerImp>(
+                      builder: (ctrl) {
+                        List<DoctorsData> doctorsDataList = ctrl.data.map((map) => DoctorsData.fromJson(map)).toList();
+
+                        return ctrl.data.isNotEmpty
+                            ? ListView.separated(
+                          itemCount: ctrl.data.length, // Use ctrl.data.length directly
+                          scrollDirection: Axis.vertical,
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            Data? receivedData = doctorsDataList[index].data;
+                            bool favItem = ctrl.favData[index]['doctor'].isNotEmpty && ctrl.favData[index]['doctor'] == ctrl.data[index]['id'];
+
+                            return SpecialistCard(
+                              favTap: () {},
+                              onTap: () {
+                                ctrl.goToDetails(
+                                  DetailsScreen(receivedData: ctrl.data[index], tabIndex: index),
+                                );
+                              },
+                              receivedData: ctrl.data[index],
+                              verified: verified,
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (favItem) {
+                                    ctrl.goToFavScreen();
+                                  } else {
+                                    ctrl.addToFav(index).then((fav) {
+                                      if (fav) {
+                                        debugPrint(' [$fav] Added to Favorites successfully! ');
+                                      } else {
+                                        debugPrint('Failed to add to Favorites!');
+                                        // Handle the case where adding to favorites failed
+                                      }
+                                    });
+                                  }
+                                },
+                                child: favItem
+                                    ? SvgPicture.asset(
+                                  'assets/images/icons/heart.svg',
+                                  color: myBlueColor,
+                                )
+                                    : SvgPicture.asset(
+                                  'assets/images/icons/heart-icon.svg',
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(height: 12.0),
+                        )
+                            : Center(child: CircularProgressIndicator(color: myBlueColor));
+                      },
+                    )
                   ]    ),
             ),
           )
       );
-    });
   }
+
+  // Widget getList() {
+  //   List<String> list = getListItems();
+  //   ListView myList = new ListView.builder(
+  //       itemCount: list.length,
+  //       itemBuilder: (context, index) {
+  //         return new ListTile(
+  //           title: new Text(list[index]),
+  //         );
+  //       });
+  //   return myList;
+  // }
+  //
+  // Widget getTheLists (){
+  //   List<String> list = getListItems();
+  //   ListView myList = new ListView.builder(itemBuilder: (context, index){
+  //     return new ListTile(
+  //       title: new Text(list[index]),
+  //     );
+  //   });
+  //   return myList;
+  // }
 }
 
 
 
 
+/**
+    GetBuilder<FavControllerImp>(builder: (ctrl){
+    return ctrl.data.isNotEmpty ? ListView.separated(
+    itemCount: ctrl.data.length,scrollDirection: Axis.vertical,padding: EdgeInsets.zero,
+    physics: const NeverScrollableScrollPhysics(),shrinkWrap: true,
+    // controller:scrollController ,
+    itemBuilder: (context,index) => SpecialistCard(favTap:(){},onTap:(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(phs:phs[index] ,)));},
+    phs: phs[index], verified: verified, child: GestureDetector(
+    onTap:(){
+    if(ctrl.favData[index]['doctor'].isNotEmpty && ctrl.favData[index]['doctor'] == ctrl.data[index]['id']){
+    ctrl.goToFavScreen();
+    }else{
+    ctrl.addToFav().then((fav) {
+    if (fav) {
+    debugPrint(
+    'Added to Favorites successfully!');
+    } else {
+    debugPrint('Failed to add to Favorites!');
+    }
+    });
+    }
+    // ctrl.favChangeIcon(index);
+    },
+    child: ctrl.favData.indexWhere(
+    (favItem) =>
+    favItem['doctor'] == ctrl.data[index]['id']) !=
+    -1
+    ? SvgPicture.asset(
+    'assets/images/icons/heart.svg',
+    color: myBlueColor,
+    )
+    : SvgPicture.asset('assets/images/icons/heart-icon.svg'),
+    ),),
+    separatorBuilder: (context,index) => SizedBox(height: 12.0.h,),
+    ) : Center(child: CircularProgressIndicator(color: myBlueColor,));
+    }),
+
+ */
 
 
+
+
+/**
+
+    GetBuilder<FavControllerImp>(
+    builder: (ctrl) {
+    return ListView(
+    children: [
+    for(int i = 0; i < ctrl.data.length; i ++ )...[
+    for(int k = 0; k < ctrl.favData.length; k ++ )...[
+    if(ctrl.data.isNotEmpty)...[
+    SpecialistCard(
+    favTap: () {},
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DetailsScreen(phs: phs[i])),
+    );
+    },
+    phs: phs[i],
+    verified: verified,
+    child: GestureDetector(
+    onTap: () {
+    if (ctrl.favData[k]['doctor'].isNotEmpty &&
+    ctrl.favData[k]['doctor'] == ctrl.data[i]['id']) {
+    ctrl.goToFavScreen();
+    } else {
+    ctrl.addToFav(k).then((fav) {
+    if (fav) {
+    debugPrint('Added to Favorites successfully!');
+    // Optionally, you can update the UI or perform other actions
+    } else {
+    debugPrint('Failed to add to Favorites!');
+    // Handle the case where adding to favorites failed
+    }
+    });
+
+    }
+    },
+    child: ctrl.isFavorite(k)
+    ? SvgPicture.asset(
+    'assets/images/icons/heart.svg',
+    color: myBlueColor,
+    )
+    : SvgPicture.asset('assets/images/icons/heart-icon.svg'),
+    ),
+    ),
+    ]else...[
+    const Center(child: CircularProgressIndicator(color: myBlueColor))
+    ]
+
+    ]
+    ]
+    ],
+    );
+    },
+    )
+
+
+
+
+ */
 
 
 

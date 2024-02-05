@@ -10,6 +10,8 @@ import 'package:co_rhema/User/views/doc/auth/signup_screen.dart';
 import 'package:co_rhema/User/views/doc/auth/signup_verify_code.dart';
 import 'package:co_rhema/User/views/doc/auth/success_sign_up.dart';
 import 'package:co_rhema/User/views/doc/views/doc_man_home_screen.dart';
+import 'package:co_rhema/User/views/favs/fav_screen.dart';
+import 'package:co_rhema/User/views/home/details_screen.dart';
 import 'package:co_rhema/User/views/profile/settings/password_manager.dart';
 import 'package:co_rhema/chat_test/chat_home.dart';
 import 'package:co_rhema/controllers/Doctor/home/doc_management_home_controller.dart';
@@ -39,15 +41,19 @@ import 'package:get/get.dart';
 List<GetPage<dynamic>> pageRoutes = [
   // GetPage(name: "/", page: ()=> const RemoteTestScreen()),
 
-  GetPage(name: "/", page: ()=> const OnBoardingScreen(),
-  middlewares: [
+  GetPage(name: "/", page: ()=> const OnBoardingScreen(),middlewares: [
     UserMiddleWare(),
-  ]),
+
+  ]
+  ),
   // GetPage(name: '/', page: ()=> const LoginScreen()),
   GetPage(name: AppRoutes.login, page: ()=> const LoginScreen(),middlewares: [
     UserAuthDocWare(),
+
   ]),
-  GetPage(name: AppRoutes.home, page: ()=> const MainScreen()),
+  GetPage(name: AppRoutes.home, page: ()=> const MainScreen(),middlewares: [
+
+  ]),
   GetPage(name: AppRoutes.chatsDetails, page: ()=> const ChatsDetailsScreen()),
   GetPage(name: AppRoutes.chatsScreen, page: ()=> ChatScreen()),
   GetPage(name: AppRoutes.forgetPassword, page: ()=> const ForgetPassword()),
@@ -58,7 +64,15 @@ List<GetPage<dynamic>> pageRoutes = [
   GetPage(name: AppRoutes.successResetPassword, page: ()=> const SuccessResetPassword()),
   GetPage(name: AppRoutes.successSignUp, page: ()=> const SuccessSignUp()),
   ///Reviews
-  GetPage(name: AppRoutes.doctorReviews, page: ()=> const DoctorReviewScreen()),
+  GetPage(name: AppRoutes.doctorReviews, page: () {
+    DoctorReviewScreen revScreen = Get.arguments;
+    return revScreen;
+  }),
+  GetPage(name: AppRoutes.details, page: (){
+    DetailsScreen detailScreen = Get.arguments;
+    return detailScreen;
+    }
+  ),
   GetPage(name: AppRoutes.hospitalReviews, page: ()=> const HospitalReviewScreen()),
   GetPage(name: AppRoutes.filter, page: ()=> const FilterScreen()),
   /// OnBoarding
@@ -67,6 +81,8 @@ List<GetPage<dynamic>> pageRoutes = [
   GetPage(name: AppRoutes.cancelBooking, page: ()=> const CancelBooking()),
   /// Pass manager
   GetPage(name: AppRoutes.passwordManager, page: ()=> const PasswordManager()),
+/// Favorites
+  GetPage(name: AppRoutes.favorites, page: ()=> const FavScreen()),
 
 
 
@@ -81,12 +97,13 @@ List<GetPage<dynamic>> pageRoutes = [
 List<GetPage<dynamic>> docRoutes = [
 
   GetPage(name: '/', page: ()=> DocLoginScreen(),
-  middlewares: [
-    AuthDocWare()
-  ]
+      middlewares: [
+        AuthDocWare()
+      ]
   ),
-  GetPage(name: AppRoutes.doctorsLogin, page: ()=>  DocLoginScreen()),
-  GetPage(name: AppRoutes.doctorsHome, page: ()=> const DocManHomeScreen()),
+  GetPage(name: AppRoutes.doctorsLogin, page: ()=>  DocLoginScreen(),
+    ),
+  GetPage(name: AppRoutes.doctorsHome, page: ()=> DocManHomeScreen()),
   // GetPage(name: AppRoutes.doctorsHome, page: ()=> const RemoteTestScreen()),
   // GetPage(name: AppRoutes.chatsDetails, page: ()=> const ChatsDetailsScreen()),
   // GetPage(name: AppRoutes.chatsScreen, page: ()=> DocChatScreen()),

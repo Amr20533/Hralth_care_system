@@ -87,127 +87,129 @@ class LoginScreen extends StatelessWidget {
               },
                   child: Text("14".tr,style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 10.w,decoration: TextDecoration.underline), textAlign: TextAlign.end,)),
 
-              // Text(
-              //   "14".tr,
-              //   textAlign: TextAlign.end,
-              // ),
-              SizedBox(height: 30.h),
+                // Text(
+                //   "14".tr,
+                //   textAlign: TextAlign.end,
+                // ),
+                SizedBox(height: 30.h),
 
-              CustomButtonAuth(text: "26".tr, onPressed: () {
-                LoginModel loginModel = LoginModel(email: controller.email.text, password: controller.password.text,);
-                controller.userLogin(loginModel).then((response){
-                  if(response == true){
-                    debugPrint("Status Success - User Logged in: $response");
-                    controller.goToHomeScreen();
-                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DocManHomeScreen() ));
-                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RemoteTestScreen() ));
-                  }else{
-                    debugPrint(" ************************ 'User' Could not log in check your credentials! ***********************");
-                  }
-                });;
+                CustomButtonAuth(text: "26".tr, onPressed: () {
+                  LoginModel loginModel = LoginModel(email: controller.email.text, password: controller.password.text,);
+                  controller.userLogin(loginModel).then((response){
+                    if(response == true && !controller.processing){
+                      debugPrint("Status Success - User Logged in: $response");
+                      controller.goToHomeScreen();
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DocManHomeScreen() ));
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RemoteTestScreen() ));
+                    }else{
+                      controller.showErrorToast(context, title: '7'.tr,description: '165'.tr,);
 
-              }),
-              SizedBox(height: 30.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20.0.w),
-                      color: Colors.grey[400],
-                      height: 1,
-                    ),
-                  ),
-                  SizedBox(width: 8.0.w,),
-                  Text('39'.tr,style: TextStyle(color: Colors.grey[500],fontSize: 9.w, fontWeight: FontWeight.w400),),
-                  SizedBox(width: 8.0.w,),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(left: 20.0.w),
-                      color: Colors.grey[400],
-                      height: 1,
-                      // width: 20,
-                    ),
-                  ),
-                  // const Expanded(
-                  //   child: VerticalDivider(
-                  //     color: Colors.grey,
-                  //     thickness: 1,
-                  //     // width: 20,
-                  //   ),
-                  // ),
+                      debugPrint(" ************************ 'User' Could not log in check your credentials! ***********************");
+                    }
+                  });;
 
-                ],
-              ),
-              SizedBox(height: 30.0.w,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 35.0.w),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                }),
+                SizedBox(height: 30.h),
+                Row(
                   children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(right: 20.0.w),
+                        color: Colors.grey[400],
+                        height: 1,
+                      ),
+                    ),
+                    SizedBox(width: 8.0.w,),
+                    Text('39'.tr,style: TextStyle(color: Colors.grey[500],fontSize: 9.w, fontWeight: FontWeight.w400),),
+                    SizedBox(width: 8.0.w,),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 20.0.w),
+                        color: Colors.grey[400],
+                        height: 1,
+                        // width: 20,
+                      ),
+                    ),
+                    // const Expanded(
+                    //   child: VerticalDivider(
+                    //     color: Colors.grey,
+                    //     thickness: 1,
+                    //     // width: 20,
+                    //   ),
+                    // ),
 
-                    Container(
-                      margin: EdgeInsets.only(right: 5.0.w),
-                     alignment: Alignment.center,
-                      height: 55.w,width: 55.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey[400]!),
-                        // color: Colors.black87
+                  ],
+                ),
+                SizedBox(height: 30.0.w,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 35.0.w),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+
+                      Container(
+                        margin: EdgeInsets.only(right: 5.0.w),
+                       alignment: Alignment.center,
+                        height: 55.w,width: 55.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey[400]!),
+                          // color: Colors.black87
+                        ),
+                        child: SvgPicture.asset('assets/images/icons/apple.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,),
                       ),
-                      child: SvgPicture.asset('assets/images/icons/apple.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,),
-                    ),
-                     Container(
-                      margin: EdgeInsets.only(right: 5.0.w),
-                     alignment: Alignment.center,
-                      height: 55.w,width: 55.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey[400]!),
-                        // color: Colors.black87
+                       Container(
+                        margin: EdgeInsets.only(right: 5.0.w),
+                       alignment: Alignment.center,
+                        height: 55.w,width: 55.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey[400]!),
+                          // color: Colors.black87
+                        ),
+                        child: SvgPicture.asset('assets/images/icons/google.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,),
                       ),
-                      child: SvgPicture.asset('assets/images/icons/google.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 5.0.w),
-                      alignment: Alignment.center,
-                      height: 55.w,width: 55.w,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey[400]!),
-                        // color: Colors.black87
+                      Container(
+                        margin: EdgeInsets.only(right: 5.0.w),
+                        alignment: Alignment.center,
+                        height: 55.w,width: 55.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.grey[400]!),
+                          // color: Colors.black87
+                        ),
+                        child: SvgPicture.asset('assets/images/icons/facebook.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,color: myBlueColor,),
                       ),
-                      child: SvgPicture.asset('assets/images/icons/facebook.svg',width: 24.w,height: 24.w,fit: BoxFit.cover,color: myBlueColor,),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 30.0.w,),
+
+                // SocialIconsDivider(),
+                CustomTextSignUpOrSignIn(title:"16".tr ,text: "17".tr, onTap: () {
+                  controller.goToSignUp();
+                },),
+/*
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("16".tr,style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 9.w),),
+                    InkWell(
+                      onTap: (){
+                        controller.goToSignUp();
+                      },
+                      child: Text("17".tr,
+                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                             color: myBlueColor,
+                             fontWeight: FontWeight.bold,decoration: TextDecoration.underline,fontSize: 9.w),),
                     ),
                   ],
                 ),
-              ),
-
-              SizedBox(height: 30.0.w,),
-
-              // SocialIconsDivider(),
-              CustomTextSignUpOrSignIn(title:"16".tr ,text: "17".tr, onTap: () {
-                controller.goToSignUp();
-              },),
-/*
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("16".tr,style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 9.w),),
-                  InkWell(
-                    onTap: (){
-                      controller.goToSignUp();
-                    },
-                    child: Text("17".tr,
-                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                           color: myBlueColor,
-                           fontWeight: FontWeight.bold,decoration: TextDecoration.underline,fontSize: 9.w),),
-                  ),
-                ],
-              ),
 */
-            ]),
+              ]),
+            ),
           ),
         ),),
-      )
-    );
+      );
   }
 }

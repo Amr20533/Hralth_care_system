@@ -8,6 +8,7 @@ import 'package:co_rhema/User/views/home/widgets/icon_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
 class PackageScreen extends StatefulWidget {
   PackageScreen({Key? key}) : super(key: key);
@@ -35,10 +36,10 @@ class _PackageScreenState extends State<PackageScreen> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomDocCard(title:"Select Package", icon: AntDesign.arrowleft,),
+                  CustomDocCard(title:"229".tr, icon: AntDesign.arrowleft,),
                   Padding(
                       padding: EdgeInsets.only(top:24.0.h,bottom: 18.0.h,),
-                      child: Text('Select Duration',style: TextStyle(color: Colors.black,fontSize: 16.0.w,fontWeight: FontWeight.w500),),
+                      child: Text('230'.tr,style: TextStyle(color: Colors.black,fontSize: 16.0.w,fontWeight: FontWeight.w500),),
                   ),
                   Container(
                     width: 325.w,height: 40.0.w,alignment: Alignment.center,
@@ -54,7 +55,7 @@ class _PackageScreenState extends State<PackageScreen> {
                           children: [
                             const Icon(Icons.watch_later,color: myBlueColor,),
                             SizedBox(width: 5.0.w,),
-                            Text('$_selectDuration minutes',style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
+                            Text('$_selectDuration ${"196".tr}',style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
                           ],
                         ),
                         DropdownButton(
@@ -80,7 +81,7 @@ class _PackageScreenState extends State<PackageScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 18.0.h,),
-                    child: Text('Select Package',style: TextStyle(color: Colors.black,fontSize: 16.0.w,fontWeight: FontWeight.w500),),
+                    child: Text('229'.tr,style: TextStyle(color: Colors.black,fontSize: 16.0.w,fontWeight: FontWeight.w500),),
                   ),
                   ListView.builder(
                     itemCount: package.length,scrollDirection: Axis.vertical,padding: EdgeInsets.zero,
@@ -95,7 +96,7 @@ class _PackageScreenState extends State<PackageScreen> {
 
                 ]),
           ),),),
-     bottomNavigationBar: CustomBottomButton(text: "Next",onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => PatientDetails()));}),
+     bottomNavigationBar: CustomBottomButton(text: "181".tr,onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => PatientDetails()));}),
 
     );
 

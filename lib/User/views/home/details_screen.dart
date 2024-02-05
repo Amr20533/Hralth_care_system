@@ -10,6 +10,8 @@ import 'package:co_rhema/User/views/home/widgets/custom_form_field.dart';
 import 'package:co_rhema/User/views/home/widgets/icon_circle.dart';
 import 'package:co_rhema/User/views/home/widgets/review_card.dart';
 import 'package:co_rhema/User/views/home/widgets/special_circle.dart';
+import 'package:co_rhema/core/constant/image_asset.dart';
+import 'package:co_rhema/core/localization/change_local.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,14 +25,16 @@ class SpecialList{
   SpecialList({this.review,this.patients,this.years,this.icon,this.ratings,this.cat});
 }
 class DetailsScreen extends StatelessWidget {
-  DetailsScreen({Key? key,required this.phs}) : super(key: key);
-  final dynamic phs;
+  DetailsScreen({Key? key,required this.receivedData,required this.tabIndex}) : super(key: key);
+  final dynamic receivedData;
+  final int tabIndex;
+
   final List<String> cl = [
     'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     'https://images.unsplash.com/photo-1580281657702-257584239a55?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D',
     'https://images.unsplash.com/photo-1559000357-f6b52ddfbe37?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGhvc3BpdGFsfGVufDB8fDB8fHww'
   ];
-  final List<String> week = ['Monday','Tuesday', 'Wednesday','Thursday','Friday','Saturday','Sunday'];
+  final List<String> week = ['218'.tr,'219'.tr,'220'.tr,'221'.tr,'222'.tr,'223'.tr,'224'.tr];
   static List<SpecialList> physicians =[SpecialList(
       patients: '7,500+',
       years: 10,
@@ -62,6 +66,9 @@ class DetailsScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    LocalController localController = Get.put(LocalController());
+    bool isRTL = localController.language.languageCode.toLowerCase() == 'ar';
+
     return Scaffold(
       backgroundColor:const Color(0xFFFCFCFC),
       body: SafeArea(
@@ -73,12 +80,31 @@ class DetailsScreen extends StatelessWidget {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        Row(
+        isRTL ? Row(
+          children: [
+            IconCircle(onTap:(){Navigator.of(context).pop(true);},icon: AntDesign.arrowleft,),
+            const Spacer(flex: 3,),
+
+            Text('206'.tr,style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
+            const Spacer(flex: 1,),
+            IconCircle(onTap:(){},icon: Icons.share_sharp,),
+            SizedBox(width: 6.w,),
+            Container(width: 33.w,height: 33.w,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22.0.w),
+                border:Border.all(color: Colors.grey[300]!,width: 1),
+              ),
+              child: Center(child: SvgPicture.asset('assets/images/icons/heart-icon.svg',color: Colors.black54,width: 16.w,height: 16.w,)),
+            ),
+          ],)
+        : Row(
         children: [
            IconCircle(onTap:(){Navigator.of(context).pop(true);},icon: AntDesign.arrowleft,),
           const Spacer(flex: 3,),
 
-          Text('Doctor Details',style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
+          Text('206'.tr,style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
           const Spacer(flex: 1,),
            IconCircle(onTap:(){},icon: Icons.share_sharp,),
           SizedBox(width: 6.w,),
@@ -99,9 +125,9 @@ class DetailsScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 45.h,
-                    backgroundImage:AssetImage(phs.image),
+                    backgroundImage:AssetImage(ImageAsset.user),
                   ),
-                  Positioned(bottom: 10.h,right: 0.0,
+                  Positioned(bottom: 10.h,right: 4.0.w,
                       child: Container(width: 12.w,height: 12.w,
                         alignment: Alignment.center,
                         decoration:const BoxDecoration(
@@ -119,7 +145,7 @@ class DetailsScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 45.h,
-                      backgroundImage:AssetImage(phs.image),
+                      backgroundImage:AssetImage(receivedData.image),
                     ),
                     Positioned(bottom: 5,right: -2.0.w,
                       child: Icon(MaterialIcons.verified,color: myBlueColor,size: 18.w,))
@@ -130,15 +156,15 @@ class DetailsScreen extends StatelessWidget {
               SizedBox(width: 7.w,),
               Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(phs.title,style: categoryBarTitleStyle(context)),
+                  Text(receivedData['name'],style: categoryBarTitleStyle(context)),
                   SizedBox(height: 6.h,),
-                  Text(phs.speciality,style: TextStyle(color:const Color(0XFF838383),fontSize: 15.h,fontWeight: FontWeight.w400),),
+                  Text('Dentist',style: TextStyle(color:const Color(0XFF838383),fontSize: 15.h,fontWeight: FontWeight.w400),),
                   SizedBox(height: 10.h,),
                   Row(
                     children: [
                       Icon(MaterialCommunityIcons.map_marker,color: myBlueColor,size: 16.w,),
                       SizedBox(width: 3.w,),
-                      Text(phs.location,style: TextStyle(color:const Color(0XFF797979),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                      Text('Cairo, Egypt',style: TextStyle(color:const Color(0XFF797979),fontSize: 16.h,fontWeight: FontWeight.w400),),
                       SizedBox(width: 5.w,),
                       Icon(MaterialCommunityIcons.map,color: myBlueColor,size: 16.w,),
 
@@ -162,7 +188,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(height: 5.0.h,),
                   Text('7,500+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                   SizedBox(height: 7.0.h,),
-                  Text('Patients',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                  Text('207'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
                 ],
               ),
               Column(
@@ -171,7 +197,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(height: 5.0.h,),
                   Text('10+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                   SizedBox(height: 7.0.h,),
-                  Text('Years Exp.',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                  Text('210'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                 ],
               ),
@@ -181,7 +207,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(height: 5.0.h,),
                   Text('4.9+',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                   SizedBox(height: 7.0.h,),
-                  Text('Rating',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                  Text('208'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                 ],
               ),
@@ -191,7 +217,7 @@ class DetailsScreen extends StatelessWidget {
                   SizedBox(height: 5.0.h,),
                   Text('4,956',style: TextStyle(color: myBlueColor,fontSize: 15.w,fontWeight: FontWeight.w600),),
                   SizedBox(height: 7.0.h,),
-                  Text('Reviews',style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
+                  Text('209'.tr,style: TextStyle(color: const Color(0XFF838383),fontSize: 12.w,fontWeight: FontWeight.w500),),
 
                 ],
               ),
@@ -201,16 +227,16 @@ class DetailsScreen extends StatelessWidget {
         SizedBox(height:3.h),
         Padding(
           padding: EdgeInsets.only(bottom: 12.0.h),
-          child: Text('About',style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
+          child: Text('211'.tr,style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
         ),
         ExpandableText('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since.',
           animation: true,animationCurve: Curves.easeIn,animationDuration: const Duration(milliseconds: 200),
           collapseOnTextTap: true,
-          expandText: 'Show More',collapseText: "Show Less",style: TextStyle(fontSize: 13.w,fontWeight: FontWeight.w400),),
+          expandText: '212'.tr,collapseText: "213".tr,style: TextStyle(fontSize: 13.w,fontWeight: FontWeight.w400),),
 
 
         SizedBox(height:18.h),
-        Text('Working Hours',style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
+        Text('214'.tr,style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
         SizedBox(height:5.h),
         Container(color: const Color(0XFF838383),height: 0.6.w,),
         SizedBox(height: 5.h,),
@@ -226,8 +252,8 @@ class DetailsScreen extends StatelessWidget {
             padding: EdgeInsets.only(top: 20.0.h,bottom:5.h),
             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Address',style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
-                Text('View on Map',style: TextStyle(color:myBlueColor,fontSize: 15.h,fontWeight: FontWeight.w500),),
+                Text('215'.tr,style: TextStyle(color:Colors.black,fontSize: 18.h,fontWeight: FontWeight.w600),),
+                Text('216'.tr,style: TextStyle(color:myBlueColor,fontSize: 15.h,fontWeight: FontWeight.w500),),
 
               ],),
           ),
@@ -237,7 +263,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               Icon(MaterialCommunityIcons.map_marker_outline,color: myBlueColor,size: 18.w,),
               SizedBox(width: 5.w,),
-              Text(phs.address,style: TextStyle(color:const Color(0XFF797979),fontSize: 16.h,fontWeight: FontWeight.w400,fontFamily: 'Cairo-Black'),),
+              Text('Cairo, Egypt',style: TextStyle(color:const Color(0XFF797979),fontSize: 16.h,fontWeight: FontWeight.w400,fontFamily: 'Cairo-Black'),),
               ],
           ),
           SizedBox(height: 5.h,),
@@ -256,17 +282,17 @@ class DetailsScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: 10.0.h,bottom:5.h),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Reviews',style: TextStyle(color:Colors.black,fontSize: 20.h,fontWeight: FontWeight.w600,fontFamily: 'Cairo-Black'),),
+                  Text('209'.tr,style: TextStyle(color:Colors.black,fontSize: 20.h,fontWeight: FontWeight.w600,fontFamily: 'Cairo-Black'),),
                   GestureDetector(
                     onTap:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorReviewScreen()));
-
-                      // controller.goToDoctorReview();
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorReviewScreen()));
+                      //
+                      controller.goToDoctorReview(DoctorReviewScreen(curIndex:tabIndex ,));
                     },
                     child: Row(
                       children: [
                         const Icon(MaterialCommunityIcons.note_edit,color: myBlueColor),
-                        Text(' Add review',style: TextStyle(color:myBlueColor,fontSize: 15.h,fontWeight: FontWeight.w500),),
+                        Text('75'.tr,style: TextStyle(color:myBlueColor,fontSize: 15.h,fontWeight: FontWeight.w500),),
                       ],
                     ),
                   ),
@@ -277,8 +303,8 @@ class DetailsScreen extends StatelessWidget {
 
           GetBuilder<ReviewControllerImp>(builder: (controller) {
             return CustomFormField(
-            controller: controller.reviewsController,
-            hintText: "Search in reviews",
+            controller: controller.reviewsSeacrchController,
+            hintText: "217".tr,
             borderRadius: BorderRadius.circular(12.0.w),
             width: 325.w,height: 40.w,
             focusBorder: OutlineInputBorder(
@@ -306,7 +332,7 @@ class DetailsScreen extends StatelessWidget {
                         Icon(AntDesign.filter,color: Colors.black,size: 7.w,),
                         // Icon(AntDesign.menu_fold,color: Colors.black,size: 7.w,),
                         SizedBox(width: 3.w,),
-                        Text('Filter',style: TextStyle(color: Colors.black,fontSize: 14.h,fontWeight: FontWeight.w500),),
+                        Text('57'.tr,style: TextStyle(color: Colors.black,fontSize: 14.h,fontWeight: FontWeight.w500),),
                         SizedBox(width: 1.w,),
                         Icon(MaterialIcons.arrow_drop_down,color: Colors.black,size: 16.w,),
 
@@ -365,7 +391,7 @@ class DetailsScreen extends StatelessWidget {
 
     ]),
     ),),),
-      bottomNavigationBar: CustomBottomButton(text:'126'.tr,onTap:(){   Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentScreen(phs: phs,)));}),
+      bottomNavigationBar: CustomBottomButton(text:'126'.tr,onTap:(){   Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentScreen(receivedData: receivedData,)));}),
 
       // bottomNavigationBar: Container(width: double.infinity,
       // height: 70.w,alignment: Alignment.center,
@@ -377,7 +403,7 @@ class DetailsScreen extends StatelessWidget {
       // borderRadius: BorderRadius.only(topRight: Radius.circular(14.w),topLeft: Radius.circular(14.w))),
       // child:GestureDetector(
       //   onTap: (){
-      //     Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentScreen(phs: phs,)));
+      //     Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentScreen(receivedData: receivedData,)));
       //     // Navigator.push(context, MaterialPageRoute(builder: (context) => FavScreen()));
       //   },
       //   child: Container(width: 290.w,height: 40.w,

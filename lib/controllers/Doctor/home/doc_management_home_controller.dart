@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:co_rhema/User/views/doc/views/chat/doc_chat_screen.dart';
+import 'package:co_rhema/User/views/doc/views/doc_layout.dart';
 import 'package:co_rhema/User/views/doc/views/doc_man_home_screen.dart';
 import 'package:co_rhema/core/class/crud.dart';
 import 'package:co_rhema/core/class/status_request.dart';
@@ -21,23 +23,25 @@ class DocManagementHomeController extends GetxController {
   Crud crud = Crud();
   static var client = http.Client();
   AppServices services = Get.find();
+  String selectedValue = '148'.tr;
+  List<String> dayList = ['163'.tr,'148'.tr,'164'.tr].obs;
+  bool clicked = false;
 
   final List screen = [
-    DocManHomeScreen(),
+    DocLayout(),
     Center(child: Text('Calender Screen'),),
-    Center(child: Text('Messaging Screen'),),
+    DocChatScreen(),
     Center(child: Text('Chart Screen'),),
     Center(child: Text('Settings Screen'),),
-    Center(child: Text('Log Out'),),
-    //BookingScreen(),
-    // FavScreen(),
-    // BookingScreen(),
-    // ChatScreen(),
-    // ProfileScreen(),
-  ].obs;
+    ].obs;
 
   void changeCurTab(int index){
     curTab.value = index;
+  }
+
+  void changeDayList(String? newValue){
+    selectedValue = newValue!;
+    update();
   }
 
   String? getDocId(){
@@ -46,14 +50,21 @@ class DocManagementHomeController extends GetxController {
     return docId;
   }
 
+
+  void logoutClicked(){
+    clicked = !clicked;
+    update();
+  }
+
   // @override
   doctorLogout()async {
+
     statusRequest = StatusRequest.LOADING;
-    bool res = false;
+    bool res = true;
     services.sharedPreferences.remove('doc-token');
     services.sharedPreferences.remove('docId');
-    // sharedPreferences.setBool('userLoggedIn',false);
-    // loggedIn = sharedPreferences.getBool('userLoggedIn') ?? false;
+    services.sharedPreferences.setBool('isLoggedIn',false);
+    services.sharedPreferences.getBool('isLoggedIn') ?? false;
     statusRequest = StatusRequest.success;
     res = true;
     return res;

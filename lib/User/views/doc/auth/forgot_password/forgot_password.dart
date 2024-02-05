@@ -46,7 +46,7 @@ class DocForgetPassword extends StatelessWidget {
                 CustomTextTitleAuth(text: "27".tr),
                 SizedBox(height: 10.h),
                 CustomTextBodyAuth(
-                    text: "24".tr),
+                    text: "29".tr),
                 SizedBox(height: 25.h),
                 CustomTextFormAuth(
                   type: TextInputType.emailAddress,
@@ -63,38 +63,56 @@ class DocForgetPassword extends StatelessWidget {
                   return Padding(
                     padding: PlatformCheck.phsDevice ? const EdgeInsets.symmetric(vertical: 0.0) : EdgeInsets.symmetric(vertical: size.height * 0.021, horizontal: size.width * 0.12),
                     child: CustomButtonAuth(text: "30".tr, onPressed: () {
-                      ctrl.checkEmail(ctrl.email.text).then((mail){
-                        if(mail && !ctrl.processing){
-                          debugPrint('Status: $mail >>>>>>>>>>>>>>> GO check your email!');
-                          _storage.write('resend_Email', ctrl.email.text);
-                          ctrl.goToDocResetPassword();
+                      if(controller.formState.currentState!.validate()){
+                        ctrl.checkEmail(ctrl.email.text).then((mail){
+                          if(mail && !ctrl.processing){
+                            debugPrint('Status: $mail >>>>>>>>>>>>>>> GO check your email!');
+                            _storage.write('resend_Email', ctrl.email.text);
+                            ctrl.goToDocResetPassword();
 
-                        }else{
-                          if(ctrl.formState.currentState!.validate()){
-                            CherryToast.warning(
-                              displayCloseButton: false,
-                              title: Text("150".tr, style: TextStyle(color: Colors.redAccent,fontSize: 16.w, fontWeight: FontWeight.bold)),
-                              displayTitle:  true,
-                              description:  Text("151".tr, style: const TextStyle(color: Colors.black45)),
-                              animationType:  AnimationType.fromLeft,
-                              animationDuration: const Duration(seconds: 2),
-                              animationCurve: Curves.fastLinearToSlowEaseIn,
-                              // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
-                              actionHandler: (){
+                          }else{
+                            if(ctrl.formState.currentState!.validate()){
+                              CherryToast.warning(
+                                displayCloseButton: false,
+                                title: Text("150".tr, style: TextStyle(color: Colors.redAccent,fontSize: 16.w, fontWeight: FontWeight.bold)),
+                                displayTitle:  true,
+                                description:  Text("151".tr, style: const TextStyle(color: Colors.black45)),
+                                animationType:  AnimationType.fromLeft,
+                                animationDuration: const Duration(seconds: 2),
+                                animationCurve: Curves.fastLinearToSlowEaseIn,
+                                // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
+                                actionHandler: (){
 
-                              },
-                              autoDismiss:  true,
-                              toastPosition:  Position.bottom,
-                            ).show(context);
+                                },
+                                autoDismiss:  true,
+                                toastPosition:  Position.bottom,
+                              ).show(context);
+
+                            }
 
                           }
 
-                        }
 
+                          // Get.showSnackbar(GetSnackBar(title: 'Warning',snackStyle: SnackStyle.FLOATING,message: 'Status: $mail No user exists with this email address!',));
+                          // debugPrint('Status: $checkEmail ____________________ Failed!');
+                        });
+                      }else{
+                        CherryToast.warning(
+                          displayCloseButton: false,
+                          title: Text("150".tr, style: TextStyle(color: Colors.redAccent,fontSize: 16.w, fontWeight: FontWeight.bold)),
+                          displayTitle:  true,
+                          description:  Text("167".tr, style: const TextStyle(color: Colors.black45)),
+                          animationType:  AnimationType.fromLeft,
+                          animationDuration: const Duration(seconds: 2),
+                          animationCurve: Curves.fastLinearToSlowEaseIn,
+                          // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
+                          actionHandler: (){
 
-                        // Get.showSnackbar(GetSnackBar(title: 'Warning',snackStyle: SnackStyle.FLOATING,message: 'Status: $mail No user exists with this email address!',));
-                        // debugPrint('Status: $checkEmail ____________________ Failed!');
-                      });
+                          },
+                          autoDismiss:  true,
+                          toastPosition:  Position.bottom,
+                        ).show(context);
+                      }
                       // ctrl.goToVerifyCode();
                     }),
                   );

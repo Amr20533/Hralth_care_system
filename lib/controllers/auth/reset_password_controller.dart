@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 abstract class ResetPasswordController extends GetxController {
-  resetPassword(String token,String newPassword);
-  docResetPassword(String token,String newPassword);
+  resetPassword(String otp,String newPassword);
+  docResetPassword(String otp,String newPassword);
   getResToken();
   getDocResToken();
   toggleIcon();
@@ -40,11 +40,11 @@ class ResetPasswordControllerImp extends ResetPasswordController {
     update();
   }
   @override
-  Future<bool> resetPassword(String token,String newPassword) async{
+  Future<bool> resetPassword(String otp,String newPassword) async{
     var formData = formState.currentState;
     bool res = false;
     if(formData!.validate()){
-      res = await AuthHelper().userForgotPassword(token,newPassword);
+      res = await AuthHelper().userForgotPassword(otp,newPassword);
       print(">>>>>>>>>>>>>>>>>>>>> reset Password: $res");
     }else{
       print("Not Valid");
@@ -52,11 +52,11 @@ class ResetPasswordControllerImp extends ResetPasswordController {
     return res;
   }
   @override
-  Future<bool> docResetPassword(String token,String newPassword) async{
+  Future<bool> docResetPassword(String otp,String newPassword) async{
     var formData = formState.currentState;
     bool res = false;
     if(formData!.validate()){
-      res = await AuthHelper().doctorForgotPassword(token,newPassword);
+      res = await AuthHelper().doctorForgotPassword(otp,newPassword);
       print(">>>>>>>>>>>>>>>>>>>>> reset Password: $res");
     }else{
       print("Not Valid");
@@ -80,9 +80,9 @@ class ResetPasswordControllerImp extends ResetPasswordController {
   Future<String> getDocResToken() async{
     await docFindResetToken.getAllData();
     var doctorData = '';
-    for(int i = 0; i < findResetToken.data.length; i++){
-      if(findResetToken.data[i]['id'] == findResetToken.getUserId()) {
-        doctorData = findResetToken.data[i]['passwordResetToken'];
+    for(int i = 0; i < docFindResetToken.data.length; i++){
+      if(docFindResetToken.data[i]['id'] == docFindResetToken.getDocId()) {
+        doctorData = docFindResetToken.data[i]['passwordResetToken'];
       }
     }
     return doctorData;
@@ -92,6 +92,11 @@ class ResetPasswordControllerImp extends ResetPasswordController {
   @override
   goToSuccessResetPassword() {
     Get.offNamed(AppRoutes.successResetPassword);
+  }
+
+  @override
+  goToResetPassword() {
+    Get.offNamed(AppRoutes.resetPassword);
   }
 
   @override

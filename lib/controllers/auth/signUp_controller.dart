@@ -64,15 +64,30 @@ class SignUpControllerImp extends SignUpController {
 
   }
   @override
-  userSignUp(SignupModel signupModel) async{
+  Future<bool> userSignUp(SignupModel signupModel, {int maxRetries = 3}) async{
     var formData = formState.currentState;
-    if(formData!.validate()){
-      processing = true;
-      bool regResponse = await AuthHelper().userSignUp(signupModel);
-      processing = false;
-      return regResponse;
+    bool regResponse = false;
+    int retryCount = 0;
+
+    while (retryCount < maxRetries) {
+      try {
+        if (formData?.validate() ?? false) {
+          processing = true;
+          regResponse = await AuthHelper().userSignUp(signupModel);
+          return regResponse;
+        }
+      } catch (e) {
+        debugPrint('Couldn\'t sign up! Error: $e');
+        retryCount++;
+        // Add a delay before retrying (adjust the duration as needed)
+        await Future.delayed(Duration(seconds: 2));
+      } finally {
+        processing = false;
+      }
+    }
+
+    return regResponse;
   }
-}
 
   @override
   goToSignIn() {

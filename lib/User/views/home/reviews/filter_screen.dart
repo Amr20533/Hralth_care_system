@@ -127,19 +127,19 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
 */
 
-                 // const DistanceRangeSlider(),
-                buildSlideBottomLabel(),
-                Container(height: 20.0.h,padding: EdgeInsets.only(left: 14.w),
-                child: Row(
-                  children: [
-                    ...List.generate(list.length, (index) => Padding(
-                      padding: EdgeInsets.only(right:list[index] != '150+' ? 38.w : 10.w),
-                      child: Text(list[index],
-                        style: TextStyle(fontSize: 12.w,fontWeight: FontWeight.w500).copyWith(color: ( list[index] == '7' || list[index] == '100')? Colors.black : Colors.black12,),
-                    )),),
-                  ],
-                ),
-                ),
+                 const DistanceRangeSlider(),
+                // buildSlideBottomLabel(),
+                // Container(height: 20.0.h,padding: EdgeInsets.only(left: 14.w),
+                // child: Row(
+                //   children: [
+                //     ...List.generate(list.length, (index) => Padding(
+                //       padding: EdgeInsets.only(right:list[index] != '150+' ? 38.w : 10.w),
+                //       child: Text(list[index],
+                //         style: TextStyle(fontSize: 12.w,fontWeight: FontWeight.w500).copyWith(color: ( list[index] == '7' || list[index] == '100')? Colors.black : Colors.black12,),
+                //     )),),
+                //   ],
+                // ),
+                // ),
                 // buildSlideBottomLabel(),
 
                  // SliderTheme(

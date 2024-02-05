@@ -28,7 +28,7 @@ abstract class ProfileController extends GetxController {
 class ProfileControllerImp extends ProfileController {
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   List<String> genderList = ["52".tr,"53".tr];
-  String selectedGender = "Select";
+  String selectedGender = "243".tr;
 
   late TextEditingController password;
   late TextEditingController resPassword;
@@ -55,11 +55,20 @@ class ProfileControllerImp extends ProfileController {
     isConfirmPassword = !isConfirmPassword;
     update();
   }
+
+
   @override
   resetPasswordToggleIcon() {
     isResetPassword = !isResetPassword;
     update();
   }
+
+
+  @override
+  deleteAccount() {
+
+  }
+
 
   /// ***************************** User ************************
 
@@ -69,7 +78,7 @@ class ProfileControllerImp extends ProfileController {
     bool res = false;
     if(formData!.validate()){
       res = await AuthHelper().userUpdatePassword(token,updatePasswordModel);
-      print(">>>>>>>>>>>>>>>>>>>>> reset Password: $res");
+      print(">>>>>>>>>>>>>>>>>>>>> update Password: $res");
     }else{
       print("Not Valid");
     }
@@ -78,12 +87,16 @@ class ProfileControllerImp extends ProfileController {
 
   @override
   userLogout()async {
-    await services.sharedPreferences.remove('user-token');
-    await services.sharedPreferences.remove('userId');
-    update();
-    await services.sharedPreferences.setBool('userLoggedIn',false);
+    statusRequest = StatusRequest.LOADING;
+    bool res = true;
+    services.sharedPreferences.remove('user-token');
+    services.sharedPreferences.remove('userId');
+    services.sharedPreferences.setBool('userLoggedIn',false);
     loggedIn = services.sharedPreferences.getBool('userLoggedIn') ?? false;
-    update();
+    statusRequest = StatusRequest.success;
+    res = true;
+    return res;
+
   }
 
   @override
@@ -182,6 +195,7 @@ class ProfileControllerImp extends ProfileController {
   }
   @override
   void onInit() {
+
     username = TextEditingController() ;
     phone = TextEditingController() ;
     email = TextEditingController() ;

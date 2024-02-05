@@ -1,10 +1,6 @@
 
-import 'dart:io' show Platform;
-import 'package:co_rhema/User/views/remote_test_screen.dart';
 import 'package:co_rhema/core/constant/platform_check.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:co_rhema/binding.dart';
-import 'package:co_rhema/core/constant/theme.dart';
 import 'package:co_rhema/core/func_utils/check_internet.dart';
 import 'package:co_rhema/core/localization/change_local.dart';
 import 'package:co_rhema/core/localization/translations.dart';
@@ -22,61 +18,59 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await initHelper();
   await GetStorage.init();
+  // await setWindowSize();
 
-  runApp( MyApp());
+  runApp( const MyApp());
 }
 
 Future setWindowSize() async{
   Size size = await DesktopWindow.getWindowSize();
   debugPrint('$size');
-  await DesktopWindow.setWindowSize(const Size(1024,768));
+  await DesktopWindow.setWindowSize(Size(size.width,size.height));
 
-  await DesktopWindow.setMinWindowSize(const Size(400,400));
-  await DesktopWindow.setMaxWindowSize(const Size(800,800));
+  await DesktopWindow.setMinWindowSize( Size(size.width * 0.9,size.height));
+  await DesktopWindow.setMaxWindowSize( Size(size.width,size.height));
 
 }
+/**
+    runApp(ScreenUtilInit(
 
+    designSize:    PlatformCheck.phsDevice ? const Size(325, 812) : Size(Get.width, Get.height),
+    // designSize: const Size(800, 1000),
+    // designSize: const Size(325, 812),
+    minTextAdapt: true,
+    useInheritedMediaQuery: true,
+    ensureScreenSize: true,
+    splitScreenMode: true,
+    builder: (_, Widget? child) {
+    return       const MyApp();
+
+    },
+    )
+  */
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
-  String platform = 'Unknown';
-
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
 
    PlatformCheck.checkPlatform();
-    /*
-       // Check if running on web
-    if (kIsWeb) {
-      platform = 'Web';
-    } else {
-      // Check for other platforms
-      if (defaultTargetPlatform == TargetPlatform.android) {
-        platform = 'Android';
-      } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-        platform = 'iOS';
-      } else if (defaultTargetPlatform == TargetPlatform.windows) {
-        platform = 'Windows';
-      } else if (defaultTargetPlatform == TargetPlatform.linux) {
-        platform = 'Linux';
-      } else if (defaultTargetPlatform == TargetPlatform.macOS) {
-        platform = 'macOS';
-      }
-    }
-     */
     Size size = MediaQuery.of(context).size;
     LocalController lController = Get.put(LocalController());
     // Locale currentLocale = Localizations.localeOf(context);
     // bool isRTL = currentLocale.languageCode.toLowerCase() == 'ar';
+   // ScreenUtil.init(context);
 
     return ScreenUtilInit(
 
-      designSize:    PlatformCheck.phsDevice ? const Size(325, 812) : Size(size.width, size.height),
+      designSize: PlatformCheck.phsDevice ? const Size(325, 812) : Size(size.width, size.height),
       // designSize: const Size(800, 1000),
       // designSize: const Size(325, 812),
       minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) {
+      // useInheritedMediaQuery: true,
+      // ensureScreenSize: true,
+      splitScreenMode: lController.splitScreenMode,
+      builder: (_, Widget? child) {
         return GetMaterialApp(
           locale: lController.language,
           // locale: lController.changeLanguage('en'),
@@ -85,7 +79,7 @@ class MyApp extends StatelessWidget {
           title: 'Doctor App',
           theme: lController.appTheme,
           // theme: lightTheme(),
-          darkTheme: darkTheme(),
+          // darkTheme: darkTheme(),
           // home:MyHomePage(),
           // home:Scaffold(
           //   body: PrivacyScreen(),

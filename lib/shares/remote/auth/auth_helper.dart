@@ -56,18 +56,17 @@ class AuthHelper {
     }
   }
 
-  Future<bool> userForgotPassword(String token, String newPassword) async {
-    var url = Uri.http(AppLink.phyServer,'/api/v1/users/resetPassword/$token');
+  Future<bool> userForgotPassword(String otp, String newPassword) async {
+    var url = Uri.http(AppLink.server, AppLink.userResetPassword);
     bool res = false;
-
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token', // Include your authorization token if required
     };
 
     final Map<String, String> body = {
       'password': newPassword,
       'passwordConfirm': newPassword,
+      'otp': otp,
     };
 
     try {
@@ -81,15 +80,17 @@ class AuthHelper {
         // Password updated successfully
         debugPrint('Password Reset Successfully! ${response.statusCode}');
         res = true;
+
       } else {
         // Handle other status codes or errors
         debugPrint('Failed to Reset Password. Status Code: ${response.statusCode}');
         res = false;
+
       }
     } catch (e) {
       // Handle exceptions
       debugPrint('Error: $e');
-      res = true;
+      res = false;
     }
     return res;
 
@@ -104,7 +105,7 @@ class AuthHelper {
         'Authorization': 'Bearer $token',
       };
 
-      var url = Uri.http(AppLink.phyServer,'/api/v1/users/resetPassword/$token');
+      var url = Uri.http(AppLink.phyServer,AppLink.userUpdateMyPassword);
 
       try {
         final response = await http.patch(
@@ -226,17 +227,17 @@ class AuthHelper {
     }
   }
 
-  Future<bool> doctorForgotPassword(String token, String newPassword) async {
-    var url = Uri.http(AppLink.server,'/api/v1/doctors/resetPassword/$token');
+  Future<bool> doctorForgotPassword(String otp, String newPassword) async {
+    var url = Uri.http(AppLink.server, AppLink.doctorResetPassword);
     bool res = false;
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token', // Include your authorization token if required
     };
 
     final Map<String, String> body = {
       'password': newPassword,
       'passwordConfirm': newPassword,
+      'otp': otp,
     };
 
     try {
@@ -263,7 +264,6 @@ class AuthHelper {
       res = false;
     }
     return res;
-
   }
 
   /// Update Password by passing your password and the new password

@@ -6,6 +6,7 @@ import 'package:co_rhema/User/views/home/widgets/icon_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FavScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class FavScreen extends StatefulWidget {
 class _FavScreenState extends State<FavScreen> with TickerProviderStateMixin{
   late final TabController _tabController = TabController(length: tabs.length, vsync: this);
 
-  List<String> tabs = ["Doctors", "Hospitals"];
+  List<String> tabs = ["237".tr, "238".tr];
   List<Specialist> phs = Specialist.physicians;
 
   int _current = 0;
@@ -67,7 +68,7 @@ class _FavScreenState extends State<FavScreen> with TickerProviderStateMixin{
                       IconCircle(onTap:(){Navigator.of(context).pop(true);},icon: AntDesign.arrowleft,),
                       const Spacer(flex: 3,),
 
-                      Text('Favorites',style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
+                      Text('239'.tr,style: TextStyle(color: Colors.black,fontSize: 14.w,fontWeight: FontWeight.w500),),
                       const Spacer(flex: 3,),
                       IconCircle(onTap:(){},icon: AntDesign.search1,),
                     ],),
@@ -92,13 +93,13 @@ class _FavScreenState extends State<FavScreen> with TickerProviderStateMixin{
                           labelStyle: appStyle(15.w,Colors.white,FontWeight.w500),
                           unselectedLabelColor: Colors.black45,
                           labelPadding: EdgeInsets.only(left: 50.w,right: 50.w),
-                          indicatorPadding: EdgeInsets.only(left: 5.w),
+                          indicatorPadding: EdgeInsets.only(left: 5.w,right: 5.w,),
                           // tabAlignment: TabAlignment.center,
-                          tabs: const [
+                          tabs: [
                             // Tab(child: Expanded(child: Text("Doctors")),iconMargin: EdgeInsets.only(left: 30.0),),
                             // Tab(child: Expanded(child: Text("Hospitals")),),
-                            Tab(text: "Doctors",),
-                            Tab(text: "Hospitals",),
+                            Tab(text: tabs[0],),
+                            Tab(text: tabs[1],),
                             // Tab(text: "Hospitals",),
                           ],),
                       ),

@@ -80,7 +80,7 @@ class ReviewSummaryScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom:10.0.h,top: 18.0.w),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Date & Hour',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('191'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                         Text('$formattedDate | $formattedTime',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),
@@ -88,15 +88,15 @@ class ReviewSummaryScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom:10.0.h,),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Package',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
-                        Text('Messaging',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('192'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('193'.tr,style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom:10.0.h,),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Duration',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('194'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                         Text('30 minutes',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),
@@ -104,8 +104,8 @@ class ReviewSummaryScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom:16.0.h,),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Booking for',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
-                        Text('Self',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('70'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('71'.tr,style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),
                   Divider(color: const Color(0XFF838383),height: 0.6.w,),
@@ -113,28 +113,28 @@ class ReviewSummaryScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom:16.0.h,top:18.0.w),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Amount',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('195'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                         Text('\$20',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),Padding(
                     padding: EdgeInsets.only(bottom:16.0.h,),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Duration (30 mins)',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('${"194".tr} (30 mins)',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                         Text('1 x \$20',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),
                   ),Padding(
                     padding: EdgeInsets.only(bottom:16.0.h,),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Duration',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
-                        Text('30 minutes',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text("194".tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('30 ${"196".tr}',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),),
                   Padding(
                     padding: EdgeInsets.only(bottom:16.0.h,top: 18.0.w),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Total',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                        Text('197'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                         Text('\$20',style: TextStyle(color:Colors.black,fontSize: 16.h,fontWeight: FontWeight.w400),),
                       ],),),
                   Divider(color: const Color(0XFF838383),height: 0.6.w,),
@@ -147,16 +147,16 @@ class ReviewSummaryScreen extends StatelessWidget {
                            // Icon(Icons.calendar_month_sharp,color: myBlueColor,),
                            const Icon(MaterialCommunityIcons.cash_multiple,color: myBlueColor,),
                            SizedBox(width: 8.0.w,),
-                           Text('Cash',style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
+                           Text('198'.tr,style: TextStyle(color:const Color(0XFF838383),fontSize: 16.h,fontWeight: FontWeight.w400),),
                          ],
                        ),
-                        Text('Change',style: TextStyle(color:myBlueColor,fontSize: 16.h,fontWeight: FontWeight.w500),),
+                        Text('90'.tr,style: TextStyle(color:myBlueColor,fontSize: 16.h,fontWeight: FontWeight.w500),),
                       ],),
                   ),
 
                 ]),
           ),),),
-      bottomNavigationBar: CustomBottomButton(text:'128'.tr,onTap:(){  Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewSummaryScreen()));}),
+      bottomNavigationBar: CustomBottomButton(text:'128'.tr,onTap:(){        }),
 
       // bottomNavigationBar: Container(width: double.infinity,
       //   height: 70.w,alignment: Alignment.center,

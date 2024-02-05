@@ -1,3 +1,4 @@
+import 'package:co_rhema/controllers/Doctor/home/doc_management_home_controller.dart';
 import 'package:co_rhema/controllers/OnBoardingController.dart';
 import 'package:co_rhema/controllers/home/booking_controller.dart';
 import 'package:co_rhema/controllers/home/filter_controller.dart';
@@ -22,6 +23,7 @@ class AppBinding extends Bindings{
     Get.lazyPut(() => FilterControllerImp());
     Get.lazyPut(() => BookingsControllerImp());
     Get.lazyPut(() => ProfileControllerImp());
+    Get.lazyPut(() => DocManagementHomeController());
     Get.lazyPut(() => HelpCenterControllerImp());
   }
 }

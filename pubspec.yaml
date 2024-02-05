@@ -71,6 +71,8 @@ dependencies:
   lottie:
   cherry_toast:
   get_storage:
+  table_calendar: ^3.0.9
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +103,7 @@ flutter:
     - assets/images/icons/
     - assets/lottie/
     - assets/bots/
+    - assets/json/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

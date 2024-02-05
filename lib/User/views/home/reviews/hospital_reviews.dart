@@ -1,15 +1,8 @@
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/controllers/home/review_controller.dart';
-import 'package:co_rhema/User/modules/speciality.dart';
-import 'package:co_rhema/User/views/appointment/package_screen.dart';
 import 'package:co_rhema/User/views/appointment/widgets/comment_box.dart';
-import 'package:co_rhema/User/views/home/about_screen.dart';
-import 'package:co_rhema/User/views/home/gallery_screen.dart';
-import 'package:co_rhema/User/views/home/review_screen.dart';
-import 'package:co_rhema/User/views/home/specialist_screen.dart';
 import 'package:co_rhema/User/views/home/widgets/custom_bottom_button.dart';
 import 'package:co_rhema/User/views/home/widgets/icon_circle.dart';
-import 'package:co_rhema/User/views/home/widgets/special_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -114,7 +107,7 @@ class HospitalReviewScreen extends StatelessWidget {
                           children: [
                             Icon(Icons.watch_later,color: myBlueColor,size: 13.w,),
                             SizedBox(width: 1.0.w,),
-                            Text("15 min",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
+                            Text("15 ${"201".tr}",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 3.w),
                               width: 3.w,height: 3.w,
@@ -123,7 +116,7 @@ class HospitalReviewScreen extends StatelessWidget {
                                 color: Colors.black45,
                               ),
                             ),
-                            Text("1.5 km",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
+                            Text("1.5 ${"202".tr}",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 3.w),
                               width: 3.w,height: 3.w,
@@ -132,7 +125,7 @@ class HospitalReviewScreen extends StatelessWidget {
                                 color: Colors.black45,
                               ),
                             ),
-                            Text("Mon  Sun  | 11 am - 11pm",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
+                            Text("204".tr,style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: const Color(0XFF838383)),),
                           ],
                         ),
                       ),
@@ -143,7 +136,7 @@ class HospitalReviewScreen extends StatelessWidget {
                         color: const Color(0XFF838383).withOpacity(0.3),height: 0.6.w,),
                       Column(crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                      Text('Your overall rating of this product',style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: Colors.grey,fontWeight: FontWeight.w600),),
+                      Text('200'.tr,style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: Colors.grey,fontWeight: FontWeight.w600),),
                       Padding(
                         padding: EdgeInsets.only(left: 18.0.w,top: 16.0.h),
                         child: Row(mainAxisAlignment: MainAxisAlignment.center,
@@ -160,10 +153,12 @@ class HospitalReviewScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left:7.0.w),
-                              child: Text('Add detailed review',style:Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12.0.w, fontWeight: FontWeight.w500,color: Colors.black ),),
+                              child: Text('199'.tr,style:Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12.0.w, fontWeight: FontWeight.w500,color: Colors.black ),),
                             ),
                             SizedBox(height: 10.h,),
-                            CommentBox(width: 325.w,height: 80.w,hintText: 'Enter here',borderRadius: BorderRadius.circular(8.0.w),),
+                            GetBuilder<ReviewControllerImp>(builder: (controller){
+                              return CommentBox(width: 325.w,controller: controller.reviewsController,height: 80.w,hintText: '178'.tr,borderRadius: BorderRadius.circular(8.0.w),);
+                            }),
                           ],
                         ),),
                       GetBuilder<ReviewControllerImp>(builder: (controller){
@@ -176,7 +171,7 @@ class HospitalReviewScreen extends StatelessWidget {
                               children: [
                                 Icon(Icons.photo_camera_outlined,color: myBlueColor,size: 15.w,),
                                 SizedBox(width: 3.0.w,),
-                                Text('add photo',style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: myBlueColor,),),
+                                Text('203'.tr,style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 11.0.w,color: myBlueColor,),),
                               ],
                             ),
                           ),);
@@ -234,7 +229,7 @@ class HospitalReviewScreen extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: CustomBottomButton(text:'Submit',onTap:(){
+      bottomNavigationBar: CustomBottomButton(text:'205'.tr,onTap:(){
 
       }),
 

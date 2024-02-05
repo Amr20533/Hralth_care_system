@@ -2,43 +2,43 @@ import 'package:get/get.dart';
 validInput(String val, int min, int max, String type) {
     // Check for null or empty value
     if (val.isEmpty) {
-      return "Field cannot be empty";
+      return '167'.tr;
     }
 
     // Specific validation based on the type
     switch (type) {
       case "username":
         if (!GetUtils.isUsername(val)) {
-          return "Invalid username format";
+          return "173".tr;
         }
         break;
 
       case "email":
         if (!GetUtils.isEmail(val)) {
-          return "Invalid email format";
+          return "172".tr;
         }
         break;
 
       case "phone":
         if (!GetUtils.isPhoneNumber(val)) {
-          return "Invalid phone number format";
+          return "174".tr;
         }
         break;
       case "password":
         if (val.length > max) {
-          return "Password length cannot exceed $max characters";
+          return "${"168".tr} $max ${'170'.tr}";
         }
         if(val.isEmpty){
           return emptyInputMessage;
         }
         // Check for length constraints
         if (val.length < min) {
-          return "Password length should be at least $min characters";
+          return "${"169".tr} $min ${'170'.tr}";
         }
         break;
 
       default:
-        return "Invalid input type";
+        return "171".tr;
     }
 //     if(type == 'password'){
 //

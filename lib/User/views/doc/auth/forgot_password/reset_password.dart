@@ -1,4 +1,5 @@
 
+import 'package:co_rhema/User/views/auth/widgets/auth/show_cherry_toast.dart';
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/controllers/auth/reset_password_controller.dart';
 import 'package:co_rhema/User/utils/valid_input.dart';
@@ -11,12 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class DocResetPassword extends StatelessWidget {
   const DocResetPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _storage = GetStorage();
+
     Get.put(ResetPasswordControllerImp());
     return GetBuilder<ResetPasswordControllerImp>(builder: (controller){
       return Scaffold(
@@ -80,7 +84,19 @@ class DocResetPassword extends StatelessWidget {
             CustomButtonAuth(
                 text: "33".tr,
                 onPressed: () {
-                  // controller.goToSuccessResetPassword();
+                  String otp = _storage.read("doc_otp");
+                  controller.docResetPassword(otp,controller.password.text).then((reset) {
+                    if(reset == true){
+                      controller.goToSuccessResetPassword();
+                      showCherrySuccessToast(context, title: Text('32'.tr), description: Text('36'.tr.tr));
+
+                    }else if(controller.resPassword.text != controller.password.text){
+                      showCherryErrorToast(context, title: Text('150'.tr), description: Text('5'.tr));
+                    }else{
+                      showCherryErrorToast(context, title: Text('7'.tr), description: Text('6'.tr));
+                    }
+                  });
+                  //
                 }),
             // const SizedBox(height: 40),
           ]),

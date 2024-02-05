@@ -13,9 +13,9 @@ class UserMiddleWare extends GetMiddleware{
     if(appServices.sharedPreferences.getString("on-Boarding") == "1"){
       return const RouteSettings(name: AppRoutes.login);
     }
-    // else if(appServices.sharedPreferences.getString("doc-token") != ""){
-    //   return const RouteSettings(name: AppRoutes.doctorsHome);
-    // }
+    else{
+      return const RouteSettings(name: AppRoutes.onBoarding);
+    }
     // return null;
   }
 
@@ -28,16 +28,13 @@ class UserAuthDocWare extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     AppServices appServices = Get.find(); // Use AppServices? for potential null
 
-    if (appServices.sharedPreferences.getString("user-token") != null) {
-      Get.offAllNamed(AppRoutes.home);
-    } else {
-      Get.offAllNamed(AppRoutes.login);
+    if (appServices.sharedPreferences.getBool("userLoggedIn") == true) {
+      return const RouteSettings(name: AppRoutes.home);
     }
-    // Return null because navigation is handled using Get.offAllNamed
-    return null;
   }
 }
 class AuthDocWare extends GetMiddleware {
+
   @override
   int? get priority => 1;
 
@@ -45,13 +42,12 @@ class AuthDocWare extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     AppServices appServices = Get.find(); // Use AppServices? for potential null
 
-    if (appServices.sharedPreferences.getString("doc-token") != null) {
+    if (appServices.sharedPreferences.getBool("isLoggedIn") == true) {
       return const RouteSettings(name: AppRoutes.doctorsHome);
     } else {
       return const RouteSettings(name: AppRoutes.doctorsLogin);
     }
 
-    // Return null because navigation is handled using Get.offAllNamed
-    // return null;
+    return null;
   }
 }

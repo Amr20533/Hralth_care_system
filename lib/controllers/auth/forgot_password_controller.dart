@@ -85,7 +85,7 @@ class ForgotPasswordControllerImp extends ForgotPasswordController{
   }
   @override
   goToDocResetPassword() {
-    Get.offNamed(AppRoutes.resetPassword);
+    Get.offNamed(AppRoutes.doctorsVerifyCode);
   }
   @override
   void onInit() {

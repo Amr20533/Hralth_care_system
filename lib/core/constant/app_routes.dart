@@ -16,6 +16,8 @@ class AppRoutes{
   static const String checkEmail = "/check-email" ;
 
   static const String cancelBooking = "/cancel-booking" ;
+  /// Favorites
+  static const String favorites = "/fav-screen" ;
 
 
   ///*************************** DOCTOR *******************************

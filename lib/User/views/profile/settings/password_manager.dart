@@ -2,6 +2,7 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:co_rhema/User/views/appointment/patient_details.dart';
+import 'package:co_rhema/User/views/auth/widgets/auth/show_cherry_toast.dart';
 import 'package:co_rhema/User/views/home/widgets/custom_bottom_button.dart';
 import 'package:co_rhema/constants.dart';
 import 'package:co_rhema/controllers/Doctor/home/doc_management_home_controller.dart';
@@ -13,6 +14,7 @@ import 'package:co_rhema/User/views/auth/widgets/auth/custom_body_auth.dart';
 import 'package:co_rhema/User/views/auth/widgets/auth/custom_text_title_auth.dart';
 import 'package:co_rhema/User/views/auth/widgets/auth/custom_textform_auth.dart';
 import 'package:co_rhema/controllers/profileController.dart';
+import 'package:co_rhema/core/constant/app_routes.dart';
 import 'package:co_rhema/models/forgot_password_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,7 +91,7 @@ class PasswordManager extends StatelessWidget {
                 suffixIcon: controller.isConfirmPassword ?  Icons.visibility_off_sharp : Icons.visibility_sharp,
                 isPassword: controller.isConfirmPassword,
                 controller: controller.confPassword,
-                hintText: "Re ${'13'.tr}",
+                hintText: "242".tr,
                 iconData: Icons.lock_outline,
                 labelText: "46".tr,
               ),
@@ -99,56 +101,30 @@ class PasswordManager extends StatelessWidget {
             ]),
           ),
         ),
-      bottomNavigationBar: CustomBottomButton(text: "153".tr,onTap:()async{
+      bottomNavigationBar: CustomBottomButton(text: "153".tr,onTap:(){
         UpdatePasswordModel model = UpdatePasswordModel(currentPassword: controller.password.text, newPassword: controller.resPassword.text, confirmPassword: controller.confPassword.text);
         String? token = controller.getUserToken();
         controller.updatePassword(token!, model).then((newPass){
-          if(newPass && controller.password.text == controller.resPassword.text){
-            controller.userLogout();
-            controller.update();
+          if(newPass == true && (controller.confPassword.text == controller.resPassword.text)){
+            controller.userLogout().then((logout){
+              if(logout == true){
+                Get.offAllNamed(AppRoutes.login);
+                return showCherrySuccessToast(context, title: Text("32".tr), description: Text("244".tr));
+
+              }else{
+                return showCherryErrorToast(context, title: Text("7".tr), description: Text("6".tr));
+              }
+            });
+
           }else if(controller.confPassword.text != controller.resPassword.text){
-            CherryToast.warning(
-              displayCloseButton: false,
-              enableIconAnimation: true,
-              title: Text("150".tr, style: TextStyle(color: Colors.amber,fontSize: 16.w, fontWeight: FontWeight.bold)),
-              displayTitle:  true,
-              description:  Text("5".tr, style: const TextStyle(color: Colors.black45)),
-              animationType:  AnimationType.fromLeft,
-              animationDuration: const Duration(seconds: 2),
-              animationCurve: Curves.fastLinearToSlowEaseIn,
-              // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
-              actionHandler: (){
-
-
-              },
-              autoDismiss:  true,
-              toastPosition:  Position.bottom,
-            ).show(context);
+            return showCherryWarningToast(context, title: Text("150".tr), description: Text("5".tr));
 
           }else{
-            CherryToast.error(
-              displayCloseButton: false,
-              title: Text("7".tr, style: TextStyle(color: Colors.redAccent,fontSize: 16.w, fontWeight: FontWeight.bold)),
-              displayTitle:  true,
-              description:  Text("6".tr, style: const TextStyle(color: Colors.black45)),
-              animationType:  AnimationType.fromLeft,
-              animationDuration: const Duration(seconds: 2),
-              animationCurve: Curves.fastLinearToSlowEaseIn,
-              // action:  const Text("Warning!", style: TextStyle(color: Colors.redAccent)),
-              actionHandler: (){
-
-              },
-              enableIconAnimation: true,
-              autoDismiss:  true,
-              toastPosition:  Position.bottom,
-            ).show(context);
-
+            return showCherryErrorToast(context, title: Text("7".tr), description: Text("6".tr));
           }
 
         });
-      }),
-
-      );
+      }));
     });
   }
 }
